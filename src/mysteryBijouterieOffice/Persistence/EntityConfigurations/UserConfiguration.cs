@@ -40,26 +40,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     private HashSet<User> getSeeds()
     {
         int id = 0;
-
         HashingHelper.CreatePasswordHash(password: "1234", passwordHash: out byte[] passwordHash, passwordSalt: out byte[] passwordSalt);
-
         HashSet<User> seeds =
-            new()
-            {
-                new User
-                {
-                    Id = ++id,
-                    UserGroupId = 1,
-                    FirstName = "Test",
-                    LastName = "Mail",
-                    Email = "test@mail.com",
-                    Status = true,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                    AuthenticatorType = AuthenticatorType.None
-                }
-            };
-
+            new() { new User(++id, 1, "Test", "Mail", "test@mail.com", passwordSalt, passwordHash, true, AuthenticatorType.None) };
         return seeds;
     }
 }

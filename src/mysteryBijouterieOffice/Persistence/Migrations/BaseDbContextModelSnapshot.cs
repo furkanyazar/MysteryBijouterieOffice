@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -12,11 +11,9 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20230918153619_Init")]
-    partial class Init
+    partial class BaseDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,13 +85,27 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Name");
 
+                    b.Property<int?>("ParentOperationClaimId")
+                        .HasColumnType("int")
+                        .HasColumnName("ParentOperationClaimId");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
 
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Value");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentOperationClaimId");
+
                     b.HasIndex(new[] { "Name" }, "UK_OperationClaims_Name")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "Value" }, "UK_OperationClaims_Value")
                         .IsUnique();
 
                     b.ToTable("OperationClaims", (string)null);
@@ -104,7 +115,8 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Admin"
+                            Name = "Admin",
+                            Value = "admin"
                         });
                 });
 
@@ -152,12 +164,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
@@ -293,8 +303,8 @@ namespace Persistence.Migrations
                             Email = "test@mail.com",
                             FirstName = "Test",
                             LastName = "Mail",
-                            PasswordHash = new byte[] { 90, 93, 68, 62, 180, 146, 0, 18, 31, 32, 181, 246, 138, 201, 47, 137, 47, 28, 22, 195, 199, 93, 184, 6, 10, 13, 0, 64, 91, 111, 146, 216, 34, 97, 167, 202, 149, 209, 94, 11, 99, 43, 37, 74, 167, 66, 231, 114, 49, 151, 91, 229, 199, 187, 253, 39, 220, 30, 72, 113, 42, 35, 38, 26 },
-                            PasswordSalt = new byte[] { 236, 33, 64, 38, 170, 100, 217, 7, 91, 65, 85, 180, 73, 0, 75, 73, 109, 123, 78, 155, 29, 148, 43, 212, 223, 45, 116, 192, 80, 249, 64, 112, 15, 74, 73, 38, 108, 45, 105, 234, 240, 42, 130, 197, 234, 7, 38, 232, 91, 243, 13, 39, 168, 106, 59, 6, 16, 49, 134, 46, 160, 231, 28, 239, 236, 107, 64, 139, 45, 242, 55, 131, 136, 168, 69, 149, 96, 88, 206, 18, 97, 136, 160, 196, 48, 63, 59, 204, 60, 153, 73, 113, 121, 160, 9, 177, 232, 57, 188, 186, 184, 24, 218, 236, 106, 61, 86, 143, 62, 63, 188, 227, 141, 190, 78, 76, 38, 51, 96, 164, 31, 9, 65, 42, 13, 214, 195, 206 },
+                            PasswordHash = new byte[] { 33, 180, 195, 24, 217, 84, 36, 97, 66, 212, 48, 58, 105, 35, 228, 216, 84, 250, 161, 239, 159, 129, 173, 243, 187, 1, 175, 250, 91, 57, 226, 252, 171, 72, 199, 143, 165, 151, 169, 48, 240, 188, 99, 88, 181, 3, 236, 130, 148, 24, 113, 122, 218, 113, 142, 3, 7, 25, 177, 241, 186, 38, 113, 187 },
+                            PasswordSalt = new byte[] { 120, 202, 49, 177, 24, 152, 208, 98, 151, 106, 116, 5, 235, 214, 89, 85, 7, 171, 79, 241, 89, 55, 240, 44, 196, 174, 176, 37, 42, 150, 30, 239, 55, 67, 105, 3, 246, 94, 91, 175, 19, 118, 91, 177, 146, 54, 127, 75, 202, 102, 174, 47, 94, 88, 211, 100, 126, 27, 134, 240, 131, 198, 164, 142, 221, 225, 191, 77, 37, 222, 42, 125, 205, 146, 43, 179, 75, 139, 160, 185, 11, 244, 3, 158, 250, 34, 202, 250, 227, 210, 214, 186, 174, 12, 201, 182, 92, 227, 208, 217, 218, 169, 246, 161, 201, 149, 124, 156, 254, 51, 5, 131, 210, 63, 228, 251, 165, 0, 96, 42, 4, 33, 174, 62, 81, 76, 195, 162 },
                             Status = true,
                             UserGroupId = 1
                         });
@@ -390,6 +400,92 @@ namespace Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CommissionRate")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("CommissionRate");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Categories_Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BarcodeNumber")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("BarcodeNumber");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("UnitPrice");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Products_Name")
+                        .IsUnique();
+
+                    b.ToTable("Products", (string)null);
+                });
+
             modelBuilder.Entity("Core.Security.Entities.EmailAuthenticator", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -399,6 +495,15 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
+                {
+                    b.HasOne("Core.Security.Entities.OperationClaim", "ParentOperationClaim")
+                        .WithMany()
+                        .HasForeignKey("ParentOperationClaimId");
+
+                    b.Navigation("ParentOperationClaim");
                 });
 
             modelBuilder.Entity("Core.Security.Entities.OtpAuthenticator", b =>
@@ -453,6 +558,17 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroup");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
                 {
                     b.Navigation("UserGroupOperationClaims");
@@ -472,6 +588,11 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroupOperationClaims");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

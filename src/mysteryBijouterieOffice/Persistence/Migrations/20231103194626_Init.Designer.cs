@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20231003120110_Update_OperationClaim")]
-    partial class Update_OperationClaim
+    [Migration("20231103194626_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Name");
 
+                    b.Property<int?>("ParentOperationClaimId")
+                        .HasColumnType("int")
+                        .HasColumnName("ParentOperationClaimId");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
@@ -98,6 +102,8 @@ namespace Persistence.Migrations
                         .HasColumnName("Value");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentOperationClaimId");
 
                     b.HasIndex(new[] { "Name" }, "UK_OperationClaims_Name")
                         .IsUnique();
@@ -161,12 +167,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
@@ -302,8 +306,8 @@ namespace Persistence.Migrations
                             Email = "test@mail.com",
                             FirstName = "Test",
                             LastName = "Mail",
-                            PasswordHash = new byte[] { 144, 97, 233, 244, 217, 113, 95, 113, 124, 18, 166, 67, 161, 133, 98, 124, 19, 196, 22, 152, 179, 71, 28, 215, 112, 209, 109, 219, 108, 214, 63, 1, 253, 71, 179, 113, 155, 90, 121, 146, 206, 195, 167, 133, 184, 122, 156, 191, 19, 84, 214, 237, 191, 44, 144, 86, 11, 206, 72, 6, 209, 128, 255, 230 },
-                            PasswordSalt = new byte[] { 110, 139, 230, 246, 240, 111, 38, 0, 109, 61, 158, 141, 207, 90, 101, 209, 18, 210, 12, 244, 167, 251, 252, 100, 107, 127, 220, 251, 40, 149, 175, 176, 218, 102, 155, 236, 49, 131, 92, 33, 53, 114, 94, 229, 174, 167, 115, 158, 238, 139, 83, 237, 53, 238, 202, 125, 68, 111, 188, 153, 226, 80, 101, 85, 148, 32, 22, 141, 180, 148, 148, 167, 32, 131, 196, 115, 156, 60, 222, 249, 12, 186, 242, 125, 117, 239, 120, 197, 36, 223, 230, 248, 142, 250, 120, 75, 249, 9, 77, 209, 77, 195, 22, 116, 34, 89, 18, 250, 78, 99, 98, 69, 6, 148, 253, 238, 106, 183, 222, 70, 58, 214, 204, 166, 247, 77, 66, 98 },
+                            PasswordHash = new byte[] { 122, 158, 162, 107, 125, 147, 75, 93, 202, 88, 38, 156, 254, 239, 145, 36, 68, 90, 242, 120, 160, 117, 136, 42, 161, 236, 178, 222, 65, 172, 182, 134, 83, 244, 210, 41, 243, 213, 63, 64, 194, 191, 240, 231, 30, 192, 172, 120, 225, 45, 178, 165, 198, 36, 173, 228, 113, 147, 127, 0, 87, 167, 175, 35 },
+                            PasswordSalt = new byte[] { 149, 216, 245, 155, 14, 120, 247, 69, 219, 112, 214, 227, 178, 126, 253, 132, 141, 44, 20, 163, 42, 18, 110, 5, 60, 17, 159, 176, 74, 108, 4, 195, 20, 126, 240, 197, 215, 50, 253, 241, 232, 111, 44, 187, 33, 121, 122, 52, 33, 8, 68, 87, 60, 251, 176, 2, 156, 189, 137, 169, 22, 79, 199, 137, 236, 30, 203, 186, 82, 43, 193, 32, 194, 235, 159, 234, 168, 96, 102, 154, 127, 80, 245, 123, 145, 173, 96, 44, 51, 2, 47, 93, 255, 99, 123, 207, 123, 118, 109, 140, 142, 229, 126, 152, 47, 183, 43, 20, 53, 89, 225, 110, 200, 74, 238, 57, 204, 82, 94, 114, 0, 240, 127, 238, 88, 213, 142, 12 },
                             Status = true,
                             UserGroupId = 1
                         });
@@ -399,6 +403,88 @@ namespace Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CommissionRate")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("CommissionRate");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Categories_Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("UnitPrice");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Products_Name")
+                        .IsUnique();
+
+                    b.ToTable("Products", (string)null);
+                });
+
             modelBuilder.Entity("Core.Security.Entities.EmailAuthenticator", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -408,6 +494,15 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
+                {
+                    b.HasOne("Core.Security.Entities.OperationClaim", "ParentOperationClaim")
+                        .WithMany()
+                        .HasForeignKey("ParentOperationClaimId");
+
+                    b.Navigation("ParentOperationClaim");
                 });
 
             modelBuilder.Entity("Core.Security.Entities.OtpAuthenticator", b =>
@@ -462,6 +557,17 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroup");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
                 {
                     b.Navigation("UserGroupOperationClaims");
@@ -481,6 +587,11 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroupOperationClaims");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

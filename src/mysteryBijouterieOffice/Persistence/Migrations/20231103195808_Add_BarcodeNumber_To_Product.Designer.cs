@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231103195808_Add_BarcodeNumber_To_Product")]
+    partial class Add_BarcodeNumber_To_Product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,6 +88,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Name");
 
+                    b.Property<int?>("ParentOperationClaimId")
+                        .HasColumnType("int")
+                        .HasColumnName("ParentOperationClaimId");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
@@ -95,6 +102,8 @@ namespace Persistence.Migrations
                         .HasColumnName("Value");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentOperationClaimId");
 
                     b.HasIndex(new[] { "Name" }, "UK_OperationClaims_Name")
                         .IsUnique();
@@ -158,12 +167,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedByIp")
                         .IsRequired()
@@ -299,8 +306,8 @@ namespace Persistence.Migrations
                             Email = "test@mail.com",
                             FirstName = "Test",
                             LastName = "Mail",
-                            PasswordHash = new byte[] { 144, 97, 233, 244, 217, 113, 95, 113, 124, 18, 166, 67, 161, 133, 98, 124, 19, 196, 22, 152, 179, 71, 28, 215, 112, 209, 109, 219, 108, 214, 63, 1, 253, 71, 179, 113, 155, 90, 121, 146, 206, 195, 167, 133, 184, 122, 156, 191, 19, 84, 214, 237, 191, 44, 144, 86, 11, 206, 72, 6, 209, 128, 255, 230 },
-                            PasswordSalt = new byte[] { 110, 139, 230, 246, 240, 111, 38, 0, 109, 61, 158, 141, 207, 90, 101, 209, 18, 210, 12, 244, 167, 251, 252, 100, 107, 127, 220, 251, 40, 149, 175, 176, 218, 102, 155, 236, 49, 131, 92, 33, 53, 114, 94, 229, 174, 167, 115, 158, 238, 139, 83, 237, 53, 238, 202, 125, 68, 111, 188, 153, 226, 80, 101, 85, 148, 32, 22, 141, 180, 148, 148, 167, 32, 131, 196, 115, 156, 60, 222, 249, 12, 186, 242, 125, 117, 239, 120, 197, 36, 223, 230, 248, 142, 250, 120, 75, 249, 9, 77, 209, 77, 195, 22, 116, 34, 89, 18, 250, 78, 99, 98, 69, 6, 148, 253, 238, 106, 183, 222, 70, 58, 214, 204, 166, 247, 77, 66, 98 },
+                            PasswordHash = new byte[] { 33, 180, 195, 24, 217, 84, 36, 97, 66, 212, 48, 58, 105, 35, 228, 216, 84, 250, 161, 239, 159, 129, 173, 243, 187, 1, 175, 250, 91, 57, 226, 252, 171, 72, 199, 143, 165, 151, 169, 48, 240, 188, 99, 88, 181, 3, 236, 130, 148, 24, 113, 122, 218, 113, 142, 3, 7, 25, 177, 241, 186, 38, 113, 187 },
+                            PasswordSalt = new byte[] { 120, 202, 49, 177, 24, 152, 208, 98, 151, 106, 116, 5, 235, 214, 89, 85, 7, 171, 79, 241, 89, 55, 240, 44, 196, 174, 176, 37, 42, 150, 30, 239, 55, 67, 105, 3, 246, 94, 91, 175, 19, 118, 91, 177, 146, 54, 127, 75, 202, 102, 174, 47, 94, 88, 211, 100, 126, 27, 134, 240, 131, 198, 164, 142, 221, 225, 191, 77, 37, 222, 42, 125, 205, 146, 43, 179, 75, 139, 160, 185, 11, 244, 3, 158, 250, 34, 202, 250, 227, 210, 214, 186, 174, 12, 201, 182, 92, 227, 208, 217, 218, 169, 246, 161, 201, 149, 124, 156, 254, 51, 5, 131, 210, 63, 228, 251, 165, 0, 96, 42, 4, 33, 174, 62, 81, 76, 195, 162 },
                             Status = true,
                             UserGroupId = 1
                         });
@@ -396,6 +403,92 @@ namespace Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CommissionRate")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("CommissionRate");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Categories_Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BarcodeNumber")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("BarcodeNumber");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("UnitPrice");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Products_Name")
+                        .IsUnique();
+
+                    b.ToTable("Products", (string)null);
+                });
+
             modelBuilder.Entity("Core.Security.Entities.EmailAuthenticator", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -405,6 +498,15 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
+                {
+                    b.HasOne("Core.Security.Entities.OperationClaim", "ParentOperationClaim")
+                        .WithMany()
+                        .HasForeignKey("ParentOperationClaimId");
+
+                    b.Navigation("ParentOperationClaim");
                 });
 
             modelBuilder.Entity("Core.Security.Entities.OtpAuthenticator", b =>
@@ -459,6 +561,17 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroup");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
                 {
                     b.Navigation("UserGroupOperationClaims");
@@ -478,6 +591,11 @@ namespace Persistence.Migrations
                     b.Navigation("UserGroupOperationClaims");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
