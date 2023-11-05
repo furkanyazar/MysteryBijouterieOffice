@@ -7,7 +7,6 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     public UpdateProductCommandValidator()
     {
         RuleFor(c => c.Id).NotEmpty();
-        RuleFor(p => p.CategoryId).NotEmpty();
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
         RuleFor(p => p.BarcodeNumber).Length(13).Must(StartsWith).Must(Number).When(p => !string.IsNullOrEmpty(p.BarcodeNumber));
     }

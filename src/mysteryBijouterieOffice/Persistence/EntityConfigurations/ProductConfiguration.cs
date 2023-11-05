@@ -11,7 +11,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.ToTable("Products").HasKey(u => u.Id);
 
         builder.Property(u => u.Id).HasColumnName("Id").IsRequired();
-        builder.Property(u => u.CategoryId).HasColumnName("CategoryId").IsRequired();
         builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
         builder.Property(u => u.BarcodeNumber).HasColumnName("BarcodeNumber").IsRequired(false);
         builder.Property(u => u.UnitPrice).HasColumnName("UnitPrice").IsRequired();
@@ -22,7 +21,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasIndex(u => u.Name, "UK_Products_Name").IsUnique();
 
         builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
-
-        builder.HasOne(u => u.Category);
     }
 }

@@ -4,7 +4,6 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries.GetListByDynamic;
 
@@ -27,7 +26,6 @@ public class GetListByDynamicProductQueryHandler
     {
         IPaginate<Product> products = await _productRepository.GetListByDynamicAsync(
             dynamic: request.DynamicQuery,
-            include: c => c.Include(x => x.Category),
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
             cancellationToken: cancellationToken

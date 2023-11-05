@@ -6,7 +6,6 @@ namespace Application.Features.Products.Commands.Create;
 
 public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRequest
 {
-    public int CategoryId { get; set; }
     public string Name { get; set; }
     public string? BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
@@ -18,9 +17,8 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         Name = string.Empty;
     }
 
-    public CreateProductCommand(int categoryId, string name, string? barcodeNumber, decimal unitPrice)
+    public CreateProductCommand(string name, string? barcodeNumber, decimal unitPrice)
     {
-        CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;

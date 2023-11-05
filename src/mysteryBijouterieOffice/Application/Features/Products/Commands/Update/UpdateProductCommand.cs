@@ -7,7 +7,6 @@ namespace Application.Features.Products.Commands.Update;
 public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRequest
 {
     public int Id { get; set; }
-    public int CategoryId { get; set; }
     public string Name { get; set; }
     public string? BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
@@ -19,10 +18,9 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         Name = string.Empty;
     }
 
-    public UpdateProductCommand(int id, int categoryId, string name, string? barcodeNumber, decimal unitPrice)
+    public UpdateProductCommand(int id, string name, string? barcodeNumber, decimal unitPrice)
     {
         Id = id;
-        CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;

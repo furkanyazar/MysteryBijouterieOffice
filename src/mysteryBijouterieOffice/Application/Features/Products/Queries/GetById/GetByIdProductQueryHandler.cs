@@ -3,7 +3,6 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries.GetById;
 
@@ -22,11 +21,7 @@ public class GetByIdProductQueryHandler : IRequestHandler<GetByIdProductQuery, G
 
     public async Task<GetByIdProductResponse> Handle(GetByIdProductQuery request, CancellationToken cancellationToken)
     {
-        Product? product = await _productRepository.GetAsync(
-            c => c.Id == request.Id,
-            include: c => c.Include(x => x.Category),
-            cancellationToken: cancellationToken
-        );
+        Product? product = await _productRepository.GetAsync(c => c.Id == request.Id, cancellationToken: cancellationToken);
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
 
