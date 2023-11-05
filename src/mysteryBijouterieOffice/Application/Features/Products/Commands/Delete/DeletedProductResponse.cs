@@ -9,18 +9,21 @@ public class DeletedProductResponse : IResponse
     public string Name { get; set; }
     public string? BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
+    public string CategoryName { get; set; }
 
     public DeletedProductResponse()
     {
         Name = string.Empty;
+        CategoryName = string.Empty;
     }
 
-    public DeletedProductResponse(int id, int categoryId, string name, string? barcodeNumber, decimal unitPrice)
+    public DeletedProductResponse(int id, int categoryId, string name, string? barcodeNumber, decimal unitPrice, string categoryName)
     {
         Id = id;
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
+        CategoryName = categoryName;
     }
 }
