@@ -7,7 +7,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
     public CreateProductCommandValidator()
     {
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
-        RuleFor(p => p.BarcodeNumber).Length(13).Must(StartsWith).Must(Number).When(p => !string.IsNullOrEmpty(p.BarcodeNumber));
+        RuleFor(p => p.BarcodeNumber).Length(13).Must(StartsWith).Must(Number);
     }
 
     private bool StartsWith(string barcodeNumber) => barcodeNumber.StartsWith("MB-");

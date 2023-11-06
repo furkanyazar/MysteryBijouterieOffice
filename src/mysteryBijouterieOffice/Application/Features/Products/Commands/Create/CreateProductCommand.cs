@@ -7,7 +7,7 @@ namespace Application.Features.Products.Commands.Create;
 public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRequest
 {
     public string Name { get; set; }
-    public string? BarcodeNumber { get; set; }
+    public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
@@ -15,9 +15,10 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
     public CreateProductCommand()
     {
         Name = string.Empty;
+        BarcodeNumber = string.Empty;
     }
 
-    public CreateProductCommand(string name, string? barcodeNumber, decimal unitPrice)
+    public CreateProductCommand(string name, string barcodeNumber, decimal unitPrice)
     {
         Name = name;
         BarcodeNumber = barcodeNumber;

@@ -22,31 +22,25 @@ public class ProductBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
-    public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenInserted(string? barcodeNumber)
+    public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenInserted(string barcodeNumber)
     {
-        if (!string.IsNullOrEmpty(barcodeNumber))
-        {
-            bool doesExists = await _productRepository.AnyAsync(
-                c => c.BarcodeNumber == barcodeNumber,
-                withDeleted: true,
-                enableTracking: false
-            );
-            if (doesExists)
-                throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
-        }
+        bool doesExists = await _productRepository.AnyAsync(
+            c => c.BarcodeNumber == barcodeNumber,
+            withDeleted: true,
+            enableTracking: false
+        );
+        if (doesExists)
+            throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
     }
 
-    public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(int id, string? barcodeNumber)
+    public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(int id, string barcodeNumber)
     {
-        if (!string.IsNullOrEmpty(barcodeNumber))
-        {
-            bool doesExists = await _productRepository.AnyAsync(
-                c => c.Id != id && c.BarcodeNumber == barcodeNumber,
-                withDeleted: true,
-                enableTracking: false
-            );
-            if (doesExists)
-                throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
-        }
+        bool doesExists = await _productRepository.AnyAsync(
+            c => c.Id != id && c.BarcodeNumber == barcodeNumber,
+            withDeleted: true,
+            enableTracking: false
+        );
+        if (doesExists)
+            throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
     }
 }

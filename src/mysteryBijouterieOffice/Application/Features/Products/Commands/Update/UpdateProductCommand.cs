@@ -8,7 +8,7 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string? BarcodeNumber { get; set; }
+    public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
@@ -16,9 +16,10 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
     public UpdateProductCommand()
     {
         Name = string.Empty;
+        BarcodeNumber = string.Empty;
     }
 
-    public UpdateProductCommand(int id, string name, string? barcodeNumber, decimal unitPrice)
+    public UpdateProductCommand(int id, string name, string barcodeNumber, decimal unitPrice)
     {
         Id = id;
         Name = name;
