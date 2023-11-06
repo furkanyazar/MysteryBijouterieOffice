@@ -21,7 +21,7 @@ public class GetByIdProductQueryHandler : IRequestHandler<GetByIdProductQuery, G
 
     public async Task<GetByIdProductResponse> Handle(GetByIdProductQuery request, CancellationToken cancellationToken)
     {
-        Product? product = await _productRepository.GetAsync(c => c.Id == request.Id, cancellationToken: cancellationToken);
+        Product? product = await _productRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
 

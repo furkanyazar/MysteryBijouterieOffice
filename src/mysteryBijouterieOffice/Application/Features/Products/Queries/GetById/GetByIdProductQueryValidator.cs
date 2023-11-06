@@ -6,6 +6,6 @@ public class GetByIdProductQueryValidator : AbstractValidator<GetByIdProductQuer
 {
     public GetByIdProductQueryValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(p => p.Id).NotEmpty();
     }
 }

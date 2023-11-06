@@ -6,9 +6,10 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
 {
     public UpdateProductCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(p => p.Id).NotEmpty();
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
         RuleFor(p => p.BarcodeNumber).Length(13).Must(StartsWith).Must(Number);
+        RuleFor(p => p.UnitPrice).NotNull();
     }
 
     private bool StartsWith(string barcodeNumber) => barcodeNumber.StartsWith("MB-");

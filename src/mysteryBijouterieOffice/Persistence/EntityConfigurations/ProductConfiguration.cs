@@ -8,18 +8,18 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("Products").HasKey(u => u.Id);
+        builder.ToTable("Products").HasKey(p => p.Id);
 
-        builder.Property(u => u.Id).HasColumnName("Id").IsRequired();
-        builder.Property(u => u.Name).HasColumnName("Name").IsRequired();
-        builder.Property(u => u.BarcodeNumber).HasColumnName("BarcodeNumber").IsRequired();
-        builder.Property(u => u.UnitPrice).HasColumnName("UnitPrice").IsRequired();
-        builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(u => u.UpdatedDate).HasColumnName("UpdatedDate").IsRequired(false);
-        builder.Property(u => u.DeletedDate).HasColumnName("DeletedDate").IsRequired(false);
+        builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
+        builder.Property(p => p.Name).HasColumnName("Name").IsRequired();
+        builder.Property(p => p.BarcodeNumber).HasColumnName("BarcodeNumber").IsRequired();
+        builder.Property(p => p.UnitPrice).HasColumnName("UnitPrice").IsRequired();
+        builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
+        builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate").IsRequired(false);
+        builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate").IsRequired(false);
 
-        builder.HasIndex(u => u.BarcodeNumber, "UK_Products_BarcodeNumber").IsUnique();
+        builder.HasIndex(p => p.BarcodeNumber, "UK_Products_BarcodeNumber").IsUnique();
 
-        builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
+        builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
     }
 }

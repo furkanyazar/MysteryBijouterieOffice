@@ -25,7 +25,7 @@ public class ProductBusinessRules : BaseBusinessRules
     public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenInserted(string barcodeNumber)
     {
         bool doesExists = await _productRepository.AnyAsync(
-            c => c.BarcodeNumber == barcodeNumber,
+            p => p.BarcodeNumber == barcodeNumber,
             withDeleted: true,
             enableTracking: false
         );
@@ -36,7 +36,7 @@ public class ProductBusinessRules : BaseBusinessRules
     public async Task ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(int id, string barcodeNumber)
     {
         bool doesExists = await _productRepository.AnyAsync(
-            c => c.Id != id && c.BarcodeNumber == barcodeNumber,
+            p => p.Id != id && p.BarcodeNumber == barcodeNumber,
             withDeleted: true,
             enableTracking: false
         );

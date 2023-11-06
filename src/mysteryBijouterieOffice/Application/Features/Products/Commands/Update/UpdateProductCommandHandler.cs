@@ -21,7 +21,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
 
     public async Task<UpdatedProductResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        Product? product = await _productRepository.GetAsync(c => c.Id == request.Id, cancellationToken: cancellationToken);
+        Product? product = await _productRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
         await _productBusinessRules.ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(request.Id, request.BarcodeNumber);
