@@ -26,7 +26,11 @@ public class ProductBusinessRules : BaseBusinessRules
     {
         if (!string.IsNullOrEmpty(barcodeNumber))
         {
-            bool doesExists = await _productRepository.AnyAsync(c => c.BarcodeNumber == barcodeNumber, enableTracking: false);
+            bool doesExists = await _productRepository.AnyAsync(
+                c => c.BarcodeNumber == barcodeNumber,
+                withDeleted: true,
+                enableTracking: false
+            );
             if (doesExists)
                 throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
         }
@@ -36,7 +40,11 @@ public class ProductBusinessRules : BaseBusinessRules
     {
         if (!string.IsNullOrEmpty(barcodeNumber))
         {
-            bool doesExists = await _productRepository.AnyAsync(c => c.Id != id && c.BarcodeNumber == barcodeNumber, enableTracking: false);
+            bool doesExists = await _productRepository.AnyAsync(
+                c => c.Id != id && c.BarcodeNumber == barcodeNumber,
+                withDeleted: true,
+                enableTracking: false
+            );
             if (doesExists)
                 throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
         }

@@ -23,12 +23,22 @@ public class MappingProfiles : Profile
         CreateMap<Product, GetListByDynamicProductListItemDto>().ReverseMap();
         CreateMap<IPaginate<Product>, GetListResponse<GetListByDynamicProductListItemDto>>().ReverseMap();
 
-        CreateMap<Product, CreateProductCommand>().ReverseMap();
+        CreateMap<Product, CreateProductCommand>()
+            .ReverseMap()
+            .ForMember(
+                dest => dest.BarcodeNumber,
+                opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.BarcodeNumber) ? src.BarcodeNumber : null)
+            );
         CreateMap<Product, CreatedProductResponse>().ReverseMap();
 
         CreateMap<Product, DeletedProductResponse>().ReverseMap();
 
-        CreateMap<Product, UpdateProductCommand>().ReverseMap();
+        CreateMap<Product, UpdateProductCommand>()
+            .ReverseMap()
+            .ForMember(
+                dest => dest.BarcodeNumber,
+                opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.BarcodeNumber) ? src.BarcodeNumber : null)
+            );
         CreateMap<Product, UpdatedProductResponse>().ReverseMap();
     }
 }
