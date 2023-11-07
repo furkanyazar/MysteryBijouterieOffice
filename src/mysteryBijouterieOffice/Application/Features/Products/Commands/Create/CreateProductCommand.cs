@@ -6,9 +6,11 @@ namespace Application.Features.Products.Commands.Create;
 
 public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRequest
 {
+    public int CategoryId { get; set; }
     public string Name { get; set; }
     public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
+    public string ModelNumber { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -16,12 +18,15 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
+        ModelNumber = string.Empty;
     }
 
-    public CreateProductCommand(string name, string barcodeNumber, decimal unitPrice)
+    public CreateProductCommand(int categoryId, string name, string barcodeNumber, decimal unitPrice, string modelNumber)
     {
+        CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
+        ModelNumber = modelNumber;
     }
 }

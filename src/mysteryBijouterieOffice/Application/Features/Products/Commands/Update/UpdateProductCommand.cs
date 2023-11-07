@@ -7,9 +7,11 @@ namespace Application.Features.Products.Commands.Update;
 public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRequest
 {
     public int Id { get; set; }
+    public int CategoryId { get; set; }
     public string Name { get; set; }
     public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
+    public string ModelNumber { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -17,13 +19,16 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
+        ModelNumber = string.Empty;
     }
 
-    public UpdateProductCommand(int id, string name, string barcodeNumber, decimal unitPrice)
+    public UpdateProductCommand(int id, int categoryId, string name, string barcodeNumber, decimal unitPrice, string modelNumber)
     {
         Id = id;
+        CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
+        ModelNumber = modelNumber;
     }
 }

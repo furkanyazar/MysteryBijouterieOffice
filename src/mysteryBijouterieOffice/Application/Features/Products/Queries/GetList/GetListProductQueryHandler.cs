@@ -4,6 +4,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries.GetList;
 
@@ -23,6 +24,7 @@ public class GetListProductQueryHandler : IRequestHandler<GetListProductQuery, G
         IPaginate<Product> products = await _productRepository.GetListAsync(
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
+            include: p => p.Include(p => p.Category),
             cancellationToken: cancellationToken
         );
         GetListResponse<GetListProductListItemDto> response = _mapper.Map<GetListResponse<GetListProductListItemDto>>(products);

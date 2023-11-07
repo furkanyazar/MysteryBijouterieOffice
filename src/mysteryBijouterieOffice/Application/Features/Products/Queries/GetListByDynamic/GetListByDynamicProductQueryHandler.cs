@@ -4,6 +4,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Products.Queries.GetListByDynamic;
 
@@ -28,6 +29,7 @@ public class GetListByDynamicProductQueryHandler
             dynamic: request.DynamicQuery,
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
+            include: p => p.Include(p => p.Category),
             cancellationToken: cancellationToken
         );
         GetListResponse<GetListByDynamicProductListItemDto> response = _mapper.Map<GetListResponse<GetListByDynamicProductListItemDto>>(
