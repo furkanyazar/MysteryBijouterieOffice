@@ -21,7 +21,7 @@ public class DeletePartnerCommandHandler : IRequestHandler<DeletePartnerCommand,
 
     public async Task<DeletedPartnerResponse> Handle(DeletePartnerCommand request, CancellationToken cancellationToken)
     {
-        Partner? partner = await _partnerRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        Partner? partner = await _partnerRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _partnerBusinessRules.PartnerShouldExistWhenSelected(partner);
 

@@ -24,14 +24,18 @@ public class PartnerBusinessRules : BaseBusinessRules
 
     public async Task PartnerNameCanNotBeDuplicatedWhenInserted(string name)
     {
-        bool doesExists = await _partnerRepository.AnyAsync(p => p.Name == name, withDeleted: true, enableTracking: false);
+        bool doesExists = await _partnerRepository.AnyAsync(predicate: p => p.Name == name, withDeleted: true, enableTracking: false);
         if (doesExists)
             throw new BusinessException(PartnersMessages.PartnerNameAlreadyExists);
     }
 
     public async Task PartnerNameCanNotBeDuplicatedWhenUpdated(int id, string name)
     {
-        bool doesExists = await _partnerRepository.AnyAsync(p => p.Id != id && p.Name == name, withDeleted: true, enableTracking: false);
+        bool doesExists = await _partnerRepository.AnyAsync(
+            predicate: p => p.Id != id && p.Name == name,
+            withDeleted: true,
+            enableTracking: false
+        );
         if (doesExists)
             throw new BusinessException(PartnersMessages.PartnerNameAlreadyExists);
     }

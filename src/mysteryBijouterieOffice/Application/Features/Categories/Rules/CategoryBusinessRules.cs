@@ -24,14 +24,18 @@ public class CategoryBusinessRules : BaseBusinessRules
 
     public async Task CategoryNameCanNotBeDuplicatedWhenInserted(string name)
     {
-        bool doesExists = await _categoryRepository.AnyAsync(p => p.Name == name, withDeleted: true, enableTracking: false);
+        bool doesExists = await _categoryRepository.AnyAsync(predicate: c => c.Name == name, withDeleted: true, enableTracking: false);
         if (doesExists)
             throw new BusinessException(CategoriesMessages.CategoryNameAlreadyExists);
     }
 
     public async Task CategoryNameCanNotBeDuplicatedWhenUpdated(int id, string name)
     {
-        bool doesExists = await _categoryRepository.AnyAsync(p => p.Id != id && p.Name == name, withDeleted: true, enableTracking: false);
+        bool doesExists = await _categoryRepository.AnyAsync(
+            predicate: c => c.Id != id && c.Name == name,
+            withDeleted: true,
+            enableTracking: false
+        );
         if (doesExists)
             throw new BusinessException(CategoriesMessages.CategoryNameAlreadyExists);
     }

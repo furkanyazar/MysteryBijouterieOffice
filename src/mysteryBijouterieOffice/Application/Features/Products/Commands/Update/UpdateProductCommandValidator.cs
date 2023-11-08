@@ -7,9 +7,9 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     public UpdateProductCommandValidator()
     {
         RuleFor(p => p.Id).NotEmpty();
-        RuleFor(p => p.CategoryId).NotEmpty();
+        RuleFor(p => p.CategoryId).GreaterThan(0).When(p => p.CategoryId != null);
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
-        RuleFor(p => p.BarcodeNumber).Length(13).Must(StartsWith).Must(Number);
+        RuleFor(p => p.BarcodeNumber).NotEmpty().Length(13).Must(StartsWith).Must(Number);
         RuleFor(p => p.UnitPrice).NotNull();
         RuleFor(p => p.ModelNumber).NotEmpty().Length(8).Must(StartsWith).Must(Number);
     }

@@ -21,7 +21,7 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
 
     public async Task<DeletedProductResponse> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
-        Product? product = await _productRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        Product? product = await _productRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
 

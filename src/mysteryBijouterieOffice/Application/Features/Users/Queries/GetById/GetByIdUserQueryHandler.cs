@@ -21,7 +21,7 @@ public class GetByIdUserQueryHandler : IRequestHandler<GetByIdUserQuery, GetById
 
     public async Task<GetByIdUserResponse> Handle(GetByIdUserQuery request, CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.GetAsync(u => u.Id == request.Id, cancellationToken: cancellationToken);
+        User? user = await _userRepository.GetAsync(predicate: u => u.Id == request.Id, cancellationToken: cancellationToken);
 
         await _userBusinessRules.UserShouldExistWhenSelected(user);
 

@@ -8,5 +8,6 @@ public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCo
     {
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.Name).NotEmpty().MinimumLength(2);
+        RuleForEach(c => c.CategoryPartners).SetValidator(new UpdateCategoryCommandCategoryPartnerListItemDtoValidator());
     }
 }

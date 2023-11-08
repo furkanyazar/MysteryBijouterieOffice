@@ -4,6 +4,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Categories.Queries.GetListByDynamic;
 
@@ -26,6 +27,7 @@ public class GetListByDynamicCategoryQueryHandler
     {
         IPaginate<Category> categories = await _categoryRepository.GetListByDynamicAsync(
             dynamic: request.DynamicQuery,
+            include: c => c.Include(c => c.CategoryPartners).ThenInclude(cp => cp.Partner),
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
             cancellationToken: cancellationToken

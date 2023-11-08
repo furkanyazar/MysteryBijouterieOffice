@@ -20,7 +20,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
 
-        builder.HasMany(c => c.Products);
+        builder.HasMany(c => c.Products).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
         builder.HasMany(c => c.CategoryPartners);
     }
 }

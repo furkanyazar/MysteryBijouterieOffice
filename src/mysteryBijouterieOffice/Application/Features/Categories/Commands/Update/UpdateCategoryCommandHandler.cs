@@ -1,12 +1,13 @@
 ﻿using Application.Features.Categories.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Transaction;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Categories.Commands.Update;
 
-public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdatedCategoryResponse>
+public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdatedCategoryResponse>, ITransactionalRequest
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMapper _mapper;
@@ -21,7 +22,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
     public async Task<UpdatedCategoryResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        Category? category = await _categoryRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        Category? category = await _categoryRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
 
         await _categoryBusinessRules.CategoryShouldExistWhenSelected(category);
         await _categoryBusinessRules.CategoryNameCanNotBeDuplicatedWhenUpdated(request.Id, request.Name);

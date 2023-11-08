@@ -7,5 +7,6 @@ public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCo
     public CreateCategoryCommandValidator()
     {
         RuleFor(c => c.Name).NotEmpty().MinimumLength(2);
+        RuleForEach(c => c.CategoryPartners).SetValidator(new CreateCategoryCommandCategoryPartnerListItemDtoValidator());
     }
 }

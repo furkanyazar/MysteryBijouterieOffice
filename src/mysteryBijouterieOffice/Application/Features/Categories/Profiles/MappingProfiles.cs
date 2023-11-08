@@ -30,5 +30,29 @@ public class MappingProfiles : Profile
 
         CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
         CreateMap<Category, UpdatedCategoryResponse>().ReverseMap();
+
+        CreateMap<CategoryPartner, CreatedCategoryResponseCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<CreatedCategoryResponseCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, DeletedCategoryResponseCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<DeletedCategoryResponseCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, UpdatedCategoryResponseCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<UpdatedCategoryResponseCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetByIdCategoryResponseCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetByIdCategoryResponseCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetListCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetListCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetListByDynamicCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetListByDynamicCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, CreateCategoryCommandCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<CreateCategoryCommandCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, UpdateCategoryCommandCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<UpdateCategoryCommandCategoryPartnerListItemDto>>().ReverseMap();
     }
 }

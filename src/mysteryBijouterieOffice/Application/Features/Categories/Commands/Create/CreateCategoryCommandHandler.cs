@@ -1,12 +1,13 @@
 ﻿using Application.Features.Categories.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Transaction;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Categories.Commands.Create;
 
-public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreatedCategoryResponse>
+public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreatedCategoryResponse>, ITransactionalRequest
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMapper _mapper;

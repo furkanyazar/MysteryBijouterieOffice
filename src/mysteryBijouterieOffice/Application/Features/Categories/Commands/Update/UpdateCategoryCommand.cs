@@ -8,17 +8,20 @@ public class UpdateCategoryCommand : IRequest<UpdatedCategoryResponse>, ISecured
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public IList<UpdateCategoryCommandCategoryPartnerListItemDto> CategoryPartners { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
     public UpdateCategoryCommand()
     {
         Name = string.Empty;
+        CategoryPartners = new List<UpdateCategoryCommandCategoryPartnerListItemDto>();
     }
 
-    public UpdateCategoryCommand(int id, string name)
+    public UpdateCategoryCommand(int id, string name, IList<UpdateCategoryCommandCategoryPartnerListItemDto> categoryPartners)
     {
         Id = id;
         Name = name;
+        CategoryPartners = categoryPartners;
     }
 }

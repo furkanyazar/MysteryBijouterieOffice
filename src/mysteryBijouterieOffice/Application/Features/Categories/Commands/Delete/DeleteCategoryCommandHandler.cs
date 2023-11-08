@@ -21,7 +21,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
     public async Task<DeletedCategoryResponse> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        Category? category = await _categoryRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        Category? category = await _categoryRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
 
         await _categoryBusinessRules.CategoryShouldExistWhenSelected(category);
 

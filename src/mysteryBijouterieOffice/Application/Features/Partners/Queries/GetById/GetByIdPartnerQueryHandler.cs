@@ -21,7 +21,7 @@ public class GetByIdPartnerQueryHandler : IRequestHandler<GetByIdPartnerQuery, G
 
     public async Task<GetByIdPartnerResponse> Handle(GetByIdPartnerQuery request, CancellationToken cancellationToken)
     {
-        Partner? partner = await _partnerRepository.GetAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        Partner? partner = await _partnerRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _partnerBusinessRules.PartnerShouldExistWhenSelected(partner);
 
