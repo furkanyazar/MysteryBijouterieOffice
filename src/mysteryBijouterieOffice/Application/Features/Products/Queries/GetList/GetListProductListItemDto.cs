@@ -11,12 +11,14 @@ public class GetListProductListItemDto : IDto
     public decimal UnitPrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
+    public IList<GetListProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public GetListProductListItemDto()
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
+        CategoryCategoryPartners = new List<GetListProductCategoryCategoryPartnerListItemDto>();
     }
 
     public GetListProductListItemDto(
@@ -26,7 +28,8 @@ public class GetListProductListItemDto : IDto
         string barcodeNumber,
         decimal unitPrice,
         string? categoryName,
-        string modelNumber
+        string modelNumber,
+        IList<GetListProductCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
         Id = id;
@@ -36,5 +39,6 @@ public class GetListProductListItemDto : IDto
         UnitPrice = unitPrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
+        CategoryCategoryPartners = categoryCategoryPartners;
     }
 }

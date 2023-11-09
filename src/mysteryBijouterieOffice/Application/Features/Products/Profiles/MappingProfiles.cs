@@ -30,5 +30,23 @@ public class MappingProfiles : Profile
 
         CreateMap<Product, UpdateProductCommand>().ReverseMap();
         CreateMap<Product, UpdatedProductResponse>().ReverseMap();
+
+        CreateMap<CategoryPartner, CreatedProductResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<CreatedProductResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, DeletedProductResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<DeletedProductResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, UpdatedProductResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<UpdatedProductResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetByIdProductResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetByIdProductResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetListProductCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetListProductCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<CategoryPartner, GetListByDynamicProductCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<GetListByDynamicProductCategoryCategoryPartnerListItemDto>>().ReverseMap();
     }
 }

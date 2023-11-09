@@ -7,5 +7,7 @@ public class CreatePartnerCommandValidator : AbstractValidator<CreatePartnerComm
     public CreatePartnerCommandValidator()
     {
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
+        RuleFor(p => p.ShippingCost).NotNull();
+        RuleFor(p => p.FreeShippingLowerLimit).NotNull();
     }
 }

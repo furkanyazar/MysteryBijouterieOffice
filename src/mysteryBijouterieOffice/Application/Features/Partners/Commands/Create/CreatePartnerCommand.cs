@@ -7,6 +7,9 @@ namespace Application.Features.Partners.Commands.Create;
 public class CreatePartnerCommand : IRequest<CreatedPartnerResponse>, ISecuredRequest
 {
     public string Name { get; set; }
+    public decimal ShippingCost { get; set; }
+    public bool HasFreeShipping { get; set; }
+    public decimal FreeShippingLowerLimit { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -15,8 +18,11 @@ public class CreatePartnerCommand : IRequest<CreatedPartnerResponse>, ISecuredRe
         Name = string.Empty;
     }
 
-    public CreatePartnerCommand(string name)
+    public CreatePartnerCommand(string name, decimal shippingCost, bool hasFreeShipping, decimal freeShippingLowerLimit)
     {
         Name = name;
+        ShippingCost = shippingCost;
+        HasFreeShipping = hasFreeShipping;
+        FreeShippingLowerLimit = freeShippingLowerLimit;
     }
 }

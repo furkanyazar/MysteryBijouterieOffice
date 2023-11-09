@@ -8,6 +8,9 @@ public class UpdatePartnerCommand : IRequest<UpdatedPartnerResponse>, ISecuredRe
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public decimal ShippingCost { get; set; }
+    public bool HasFreeShipping { get; set; }
+    public decimal FreeShippingLowerLimit { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -16,9 +19,12 @@ public class UpdatePartnerCommand : IRequest<UpdatedPartnerResponse>, ISecuredRe
         Name = string.Empty;
     }
 
-    public UpdatePartnerCommand(int id, string name)
+    public UpdatePartnerCommand(int id, string name, decimal shippingCost, bool hasFreeShipping, decimal freeShippingLowerLimit)
     {
         Id = id;
         Name = name;
+        ShippingCost = shippingCost;
+        HasFreeShipping = hasFreeShipping;
+        FreeShippingLowerLimit = freeShippingLowerLimit;
     }
 }

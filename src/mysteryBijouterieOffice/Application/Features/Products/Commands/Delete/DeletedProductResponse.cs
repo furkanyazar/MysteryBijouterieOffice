@@ -11,12 +11,14 @@ public class DeletedProductResponse : IResponse
     public decimal UnitPrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
+    public IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public DeletedProductResponse()
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
+        CategoryCategoryPartners = new List<DeletedProductResponseCategoryCategoryPartnerListItemDto>();
     }
 
     public DeletedProductResponse(
@@ -26,7 +28,8 @@ public class DeletedProductResponse : IResponse
         string barcodeNumber,
         decimal unitPrice,
         string? categoryName,
-        string modelNumber
+        string modelNumber,
+        IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
         Id = id;
@@ -36,5 +39,6 @@ public class DeletedProductResponse : IResponse
         UnitPrice = unitPrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
+        CategoryCategoryPartners = categoryCategoryPartners;
     }
 }

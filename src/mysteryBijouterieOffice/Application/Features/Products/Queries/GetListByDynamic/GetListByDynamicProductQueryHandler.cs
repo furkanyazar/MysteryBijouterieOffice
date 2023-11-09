@@ -27,7 +27,7 @@ public class GetListByDynamicProductQueryHandler
     {
         IPaginate<Product> products = await _productRepository.GetListByDynamicAsync(
             dynamic: request.DynamicQuery,
-            include: p => p.Include(p => p.Category)!,
+            include: p => p.Include(p => p.Category).ThenInclude(c => c!.CategoryPartners),
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
             cancellationToken: cancellationToken

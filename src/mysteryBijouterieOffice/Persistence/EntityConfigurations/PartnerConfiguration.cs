@@ -12,6 +12,9 @@ public class PartnerConfiguration : IEntityTypeConfiguration<Partner>
 
         builder.Property(p => p.Id).HasColumnName("Id").IsRequired();
         builder.Property(p => p.Name).HasColumnName("Name").IsRequired();
+        builder.Property(p => p.ShippingCost).HasColumnName("ShippingCost").IsRequired();
+        builder.Property(p => p.HasFreeShipping).HasColumnName("HasFreeShipping").IsRequired();
+        builder.Property(p => p.FreeShippingLowerLimit).HasColumnName("FreeShippingLowerLimit").IsRequired();
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate").IsRequired(false);
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate").IsRequired(false);

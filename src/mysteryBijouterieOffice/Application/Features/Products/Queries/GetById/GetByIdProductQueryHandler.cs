@@ -24,7 +24,7 @@ public class GetByIdProductQueryHandler : IRequestHandler<GetByIdProductQuery, G
     {
         Product? product = await _productRepository.GetAsync(
             predicate: p => p.Id == request.Id,
-            include: p => p.Include(p => p.Category)!,
+            include: p => p.Include(p => p.Category).ThenInclude(c => c!.CategoryPartners),
             cancellationToken: cancellationToken
         );
 

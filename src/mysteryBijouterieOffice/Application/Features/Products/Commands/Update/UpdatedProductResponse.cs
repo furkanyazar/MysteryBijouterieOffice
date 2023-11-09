@@ -11,12 +11,14 @@ public class UpdatedProductResponse : IResponse
     public decimal UnitPrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
+    public IList<UpdatedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public UpdatedProductResponse()
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
+        CategoryCategoryPartners = new List<UpdatedProductResponseCategoryCategoryPartnerListItemDto>();
     }
 
     public UpdatedProductResponse(
@@ -26,7 +28,8 @@ public class UpdatedProductResponse : IResponse
         string barcodeNumber,
         decimal unitPrice,
         string? categoryName,
-        string modelNumber
+        string modelNumber,
+        IList<UpdatedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
         Id = id;
@@ -36,5 +39,6 @@ public class UpdatedProductResponse : IResponse
         UnitPrice = unitPrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
+        CategoryCategoryPartners = categoryCategoryPartners;
     }
 }
