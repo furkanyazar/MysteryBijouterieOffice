@@ -1,6 +1,7 @@
 ﻿using Core.Application.Pipelines.Authorization;
 using Core.Security.Constants;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Products.Commands.Update;
 
@@ -12,6 +13,8 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
     public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
     public string ModelNumber { get; set; }
+    public string? Description { get; set; }
+    public IFormFile? Image { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -22,7 +25,16 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         ModelNumber = string.Empty;
     }
 
-    public UpdateProductCommand(int id, int categoryId, string name, string barcodeNumber, decimal unitPrice, string modelNumber)
+    public UpdateProductCommand(
+        int id,
+        int categoryId,
+        string name,
+        string barcodeNumber,
+        decimal unitPrice,
+        string modelNumber,
+        string? description,
+        IFormFile? image
+    )
     {
         Id = id;
         CategoryId = categoryId;
@@ -30,5 +42,7 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
         ModelNumber = modelNumber;
+        Description = description;
+        Image = image;
     }
 }

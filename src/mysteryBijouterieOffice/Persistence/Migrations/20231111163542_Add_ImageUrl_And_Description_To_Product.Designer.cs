@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111163542_Add_ImageUrl_And_Description_To_Product")]
+    partial class Add_ImageUrl_And_Description_To_Product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,8 +306,8 @@ namespace Persistence.Migrations
                             Email = "test@mail.com",
                             FirstName = "Test",
                             LastName = "Mail",
-                            PasswordHash = new byte[] { 21, 135, 252, 42, 51, 143, 8, 219, 212, 165, 172, 31, 69, 160, 128, 33, 36, 19, 50, 69, 147, 4, 15, 180, 105, 244, 87, 13, 40, 202, 143, 26, 134, 79, 35, 151, 224, 226, 140, 126, 85, 82, 92, 215, 218, 156, 127, 181, 213, 229, 121, 63, 15, 180, 129, 78, 29, 232, 124, 138, 73, 176, 16, 25 },
-                            PasswordSalt = new byte[] { 201, 242, 59, 154, 173, 131, 149, 166, 150, 189, 40, 4, 83, 209, 66, 34, 13, 84, 204, 224, 105, 170, 1, 0, 246, 172, 17, 63, 97, 207, 27, 21, 123, 76, 255, 58, 18, 139, 219, 118, 201, 45, 157, 101, 110, 164, 50, 179, 25, 3, 54, 119, 125, 86, 107, 39, 135, 227, 31, 78, 3, 134, 72, 177, 94, 13, 9, 85, 210, 136, 79, 1, 206, 135, 114, 254, 120, 120, 100, 216, 75, 209, 97, 61, 115, 200, 163, 0, 96, 241, 176, 15, 214, 224, 47, 232, 175, 166, 64, 179, 224, 0, 245, 115, 72, 75, 32, 134, 111, 137, 223, 184, 223, 84, 125, 98, 183, 199, 78, 26, 176, 234, 70, 30, 204, 186, 208, 28 },
+                            PasswordHash = new byte[] { 170, 246, 115, 202, 170, 224, 52, 67, 210, 107, 90, 178, 108, 149, 5, 174, 203, 155, 153, 102, 103, 43, 171, 240, 250, 185, 88, 55, 8, 177, 1, 200, 241, 123, 122, 86, 85, 191, 118, 71, 48, 85, 106, 222, 149, 217, 147, 16, 194, 39, 60, 213, 146, 142, 237, 8, 93, 117, 36, 48, 113, 9, 17, 47 },
+                            PasswordSalt = new byte[] { 40, 251, 168, 213, 0, 148, 25, 117, 60, 153, 16, 81, 255, 194, 173, 163, 49, 174, 255, 35, 54, 236, 104, 94, 186, 78, 153, 159, 251, 196, 18, 58, 19, 222, 4, 217, 180, 190, 44, 189, 44, 235, 19, 80, 128, 225, 254, 237, 94, 39, 112, 199, 43, 28, 103, 184, 162, 226, 158, 243, 136, 135, 193, 99, 161, 189, 39, 66, 126, 55, 112, 24, 22, 82, 202, 27, 3, 100, 107, 190, 57, 104, 14, 116, 60, 150, 14, 89, 13, 187, 226, 239, 192, 135, 0, 65, 72, 37, 133, 229, 244, 238, 162, 9, 71, 244, 214, 210, 172, 121, 255, 53, 235, 173, 162, 11, 194, 30, 203, 128, 77, 16, 148, 213, 143, 83, 120, 236 },
                             Status = true,
                             UserGroupId = 1
                         });
@@ -463,6 +466,10 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("PartnerId");
 
+                    b.Property<decimal>("ServiceFee")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("ServiceFee");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
@@ -506,10 +513,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Name");
-
-                    b.Property<decimal>("ServiceFee")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("ServiceFee");
 
                     b.Property<decimal>("ShippingCost")
                         .HasColumnType("decimal(18,2)")

@@ -8,6 +8,7 @@ public class Partner : Entity<int>
     public decimal ShippingCost { get; set; }
     public bool HasFreeShipping { get; set; }
     public decimal FreeShippingLowerLimit { get; set; }
+    public decimal ServiceFee { get; set; }
 
     public virtual ICollection<CategoryPartner> CategoryPartners { get; set; } = null!;
 
@@ -16,18 +17,20 @@ public class Partner : Entity<int>
         Name = string.Empty;
     }
 
-    public Partner(string name, decimal shippingCost, decimal freeShippingLowerLimit)
+    public Partner(string name, decimal shippingCost, decimal freeShippingLowerLimit, decimal serviceFee)
     {
         Name = name;
         ShippingCost = shippingCost;
         FreeShippingLowerLimit = freeShippingLowerLimit;
+        ServiceFee = serviceFee;
     }
 
-    public Partner(int id, string name, decimal shippingCost, decimal freeShippingLowerLimit)
+    public Partner(int id, string name, decimal shippingCost, decimal freeShippingLowerLimit, decimal serviceFee)
         : base(id)
     {
         Name = name;
         ShippingCost = shippingCost;
         FreeShippingLowerLimit = freeShippingLowerLimit;
+        ServiceFee = serviceFee;
     }
 }

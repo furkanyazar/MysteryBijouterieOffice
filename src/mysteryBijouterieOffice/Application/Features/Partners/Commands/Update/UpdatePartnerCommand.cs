@@ -11,6 +11,7 @@ public class UpdatePartnerCommand : IRequest<UpdatedPartnerResponse>, ISecuredRe
     public decimal ShippingCost { get; set; }
     public bool HasFreeShipping { get; set; }
     public decimal FreeShippingLowerLimit { get; set; }
+    public decimal ServiceFee { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -19,12 +20,20 @@ public class UpdatePartnerCommand : IRequest<UpdatedPartnerResponse>, ISecuredRe
         Name = string.Empty;
     }
 
-    public UpdatePartnerCommand(int id, string name, decimal shippingCost, bool hasFreeShipping, decimal freeShippingLowerLimit)
+    public UpdatePartnerCommand(
+        int id,
+        string name,
+        decimal shippingCost,
+        bool hasFreeShipping,
+        decimal freeShippingLowerLimit,
+        decimal serviceFee
+    )
     {
         Id = id;
         Name = name;
         ShippingCost = shippingCost;
         HasFreeShipping = hasFreeShipping;
         FreeShippingLowerLimit = freeShippingLowerLimit;
+        ServiceFee = serviceFee;
     }
 }

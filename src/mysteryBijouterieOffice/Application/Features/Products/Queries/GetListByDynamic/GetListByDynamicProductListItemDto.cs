@@ -11,6 +11,8 @@ public class GetListByDynamicProductListItemDto : IDto
     public decimal UnitPrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? Description { get; set; }
     public IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public GetListByDynamicProductListItemDto()
@@ -29,6 +31,8 @@ public class GetListByDynamicProductListItemDto : IDto
         decimal unitPrice,
         string? categoryName,
         string modelNumber,
+        string? imageUrl,
+        string? description,
         IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> categoryPartners
     )
     {
@@ -39,6 +43,8 @@ public class GetListByDynamicProductListItemDto : IDto
         UnitPrice = unitPrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
+        ImageUrl = imageUrl;
+        Description = description;
         CategoryCategoryPartners = categoryPartners;
     }
 }

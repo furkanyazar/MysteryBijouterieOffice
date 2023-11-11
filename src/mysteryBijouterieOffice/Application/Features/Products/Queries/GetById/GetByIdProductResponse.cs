@@ -11,6 +11,8 @@ public class GetByIdProductResponse : IResponse
     public decimal UnitPrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? Description { get; set; }
     public IList<GetByIdProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public GetByIdProductResponse()
@@ -29,6 +31,8 @@ public class GetByIdProductResponse : IResponse
         decimal unitPrice,
         string? categoryName,
         string modelNumber,
+        string? imageUrl,
+        string description,
         IList<GetByIdProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
@@ -39,6 +43,8 @@ public class GetByIdProductResponse : IResponse
         UnitPrice = unitPrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
+        ImageUrl = imageUrl;
+        Description = description;
         CategoryCategoryPartners = categoryCategoryPartners;
     }
 }

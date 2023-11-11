@@ -9,6 +9,8 @@ public class Product : Entity<int>
     public string BarcodeNumber { get; set; }
     public decimal UnitPrice { get; set; }
     public string ModelNumber { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? Description { get; set; }
 
     public virtual Category? Category { get; set; }
 
@@ -19,16 +21,35 @@ public class Product : Entity<int>
         ModelNumber = string.Empty;
     }
 
-    public Product(int? categoryId, string name, string barcodeNumber, decimal unitPrice, string modelNumber)
+    public Product(
+        int? categoryId,
+        string name,
+        string barcodeNumber,
+        decimal unitPrice,
+        string modelNumber,
+        string? imageUrl,
+        string? description
+    )
     {
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
         ModelNumber = modelNumber;
+        ImageUrl = imageUrl;
+        Description = description;
     }
 
-    public Product(int id, int? categoryId, string name, string barcodeNumber, decimal unitPrice, string modelNumber)
+    public Product(
+        int id,
+        int? categoryId,
+        string name,
+        string barcodeNumber,
+        decimal unitPrice,
+        string modelNumber,
+        string? imageUrl,
+        string? description
+    )
         : base(id)
     {
         CategoryId = categoryId;
@@ -36,5 +57,7 @@ public class Product : Entity<int>
         BarcodeNumber = barcodeNumber;
         UnitPrice = unitPrice;
         ModelNumber = modelNumber;
+        ImageUrl = imageUrl;
+        Description = description;
     }
 }
