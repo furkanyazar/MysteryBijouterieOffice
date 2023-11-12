@@ -1,6 +1,7 @@
 ﻿using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
+using Application.Features.Products.Commands.UploadImage;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
 using Application.Features.Products.Queries.GetListByDynamic;
@@ -48,5 +49,7 @@ public class MappingProfiles : Profile
 
         CreateMap<CategoryPartner, GetListByDynamicProductCategoryCategoryPartnerListItemDto>().ReverseMap();
         CreateMap<ICollection<CategoryPartner>, List<GetListByDynamicProductCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<Product, UploadedImageResponse>().ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id)).ReverseMap();
     }
 }

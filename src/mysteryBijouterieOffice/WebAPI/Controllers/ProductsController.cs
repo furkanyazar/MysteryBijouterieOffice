@@ -1,6 +1,7 @@
 ﻿using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
+using Application.Features.Products.Commands.UploadImage;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
 using Application.Features.Products.Queries.GetListByDynamic;
@@ -56,6 +57,14 @@ public class ProductsController : BaseController
     public async Task<IActionResult> Update([FromBody] UpdateProductCommand updateProductCommand)
     {
         UpdatedProductResponse result = await Mediator.Send(updateProductCommand);
+        return Ok(result);
+    }
+
+    [HttpPost("[action]/{productId}")]
+    public async Task<IActionResult> UploadImage([FromRoute] int productId, IFormFile image)
+    {
+        UploadImageCommand uploadImageCommand = new() { ProductId = productId, Image = image };
+        UploadedImageResponse result = await Mediator.Send(uploadImageCommand);
         return Ok(result);
     }
 }

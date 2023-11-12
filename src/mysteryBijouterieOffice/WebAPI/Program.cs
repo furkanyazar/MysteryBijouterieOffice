@@ -94,9 +94,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-const string webApiConfigurationSection = "WebApiConfiguration";
-WebApiConfiguration webApiConfiguration =
-    app.Configuration.GetSection(webApiConfigurationSection).Get<WebApiConfiguration>()
+const string webApiConfigurationSection = "WebAPIConfiguration";
+WebAPIConfiguration webApiConfiguration =
+    app.Configuration.GetSection(webApiConfigurationSection).Get<WebAPIConfiguration>()
     ?? throw new InvalidOperationException($"\"{webApiConfigurationSection}\" section cannot found in configuration.");
 app.UseCors(opt => opt.WithOrigins(webApiConfiguration.AllowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 
