@@ -13,6 +13,7 @@ public class DeletedProductResponse : IResponse
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
+    public bool Status { get; set; }
     public IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public DeletedProductResponse()
@@ -33,6 +34,7 @@ public class DeletedProductResponse : IResponse
         string modelNumber,
         string? imageUrl,
         string description,
+        bool status,
         IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
@@ -45,6 +47,7 @@ public class DeletedProductResponse : IResponse
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
+        Status = status;
         CategoryCategoryPartners = categoryCategoryPartners;
     }
 }

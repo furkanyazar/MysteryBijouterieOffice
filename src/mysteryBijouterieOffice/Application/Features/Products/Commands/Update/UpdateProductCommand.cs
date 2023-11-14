@@ -13,6 +13,7 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
     public decimal UnitPrice { get; set; }
     public string ModelNumber { get; set; }
     public string? Description { get; set; }
+    public bool Status { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -30,7 +31,8 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         string barcodeNumber,
         decimal unitPrice,
         string modelNumber,
-        string? description
+        string? description,
+        bool status
     )
     {
         Id = id;
@@ -40,5 +42,6 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         UnitPrice = unitPrice;
         ModelNumber = modelNumber;
         Description = description;
+        Status = status;
     }
 }

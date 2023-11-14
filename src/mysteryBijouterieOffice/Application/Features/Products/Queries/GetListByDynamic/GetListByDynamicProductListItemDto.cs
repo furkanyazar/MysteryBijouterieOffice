@@ -13,6 +13,7 @@ public class GetListByDynamicProductListItemDto : IDto
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
+    public bool Status { get; set; }
     public IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public GetListByDynamicProductListItemDto()
@@ -33,6 +34,7 @@ public class GetListByDynamicProductListItemDto : IDto
         string modelNumber,
         string? imageUrl,
         string? description,
+        bool status,
         IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> categoryPartners
     )
     {
@@ -45,6 +47,7 @@ public class GetListByDynamicProductListItemDto : IDto
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
+        Status = status;
         CategoryCategoryPartners = categoryPartners;
     }
 }

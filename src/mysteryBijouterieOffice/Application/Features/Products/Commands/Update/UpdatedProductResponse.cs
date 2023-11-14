@@ -13,6 +13,7 @@ public class UpdatedProductResponse : IResponse
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
+    public bool Status { get; set; }
     public IList<UpdatedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
     public UpdatedProductResponse()
@@ -33,6 +34,7 @@ public class UpdatedProductResponse : IResponse
         string modelNumber,
         string? imageUrl,
         string description,
+        bool status,
         IList<UpdatedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
@@ -45,6 +47,7 @@ public class UpdatedProductResponse : IResponse
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
+        Status = status;
         CategoryCategoryPartners = categoryCategoryPartners;
     }
 }

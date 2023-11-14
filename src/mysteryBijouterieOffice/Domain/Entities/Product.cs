@@ -11,6 +11,7 @@ public class Product : Entity<int>
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
+    public bool Status { get; set; }
 
     public virtual Category? Category { get; set; }
 
@@ -28,7 +29,8 @@ public class Product : Entity<int>
         decimal unitPrice,
         string modelNumber,
         string? imageUrl,
-        string? description
+        string? description,
+        bool status
     )
     {
         CategoryId = categoryId;
@@ -38,6 +40,7 @@ public class Product : Entity<int>
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
+        Status = status;
     }
 
     public Product(
@@ -48,7 +51,8 @@ public class Product : Entity<int>
         decimal unitPrice,
         string modelNumber,
         string? imageUrl,
-        string? description
+        string? description,
+        bool status
     )
         : base(id)
     {
@@ -59,5 +63,6 @@ public class Product : Entity<int>
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
+        Status = status;
     }
 }
