@@ -14,7 +14,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.CategoryId).HasColumnName("CategoryId").IsRequired(false);
         builder.Property(p => p.Name).HasColumnName("Name").IsRequired();
         builder.Property(p => p.BarcodeNumber).HasColumnName("BarcodeNumber").IsRequired();
-        builder.Property(p => p.UnitPrice).HasColumnName("UnitPrice").IsRequired();
+        builder.Property(p => p.PurchasePrice).HasColumnName("PurchasePrice").IsRequired();
+        builder.Property(p => p.SalePrice).HasColumnName("SalePrice").IsRequired();
         builder.Property(p => p.ModelNumber).HasColumnName("ModelNumber").IsRequired();
         builder.Property(p => p.ImageUrl).HasColumnName("ImageUrl").IsRequired(false);
         builder.Property(p => p.Description).HasColumnName("Description").IsRequired(false);

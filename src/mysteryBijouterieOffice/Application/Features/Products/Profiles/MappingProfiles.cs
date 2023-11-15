@@ -1,6 +1,7 @@
 ﻿using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
+using Application.Features.Products.Commands.UpdateSalePrice;
 using Application.Features.Products.Commands.UploadImage;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
@@ -24,7 +25,9 @@ public class MappingProfiles : Profile
         CreateMap<Product, GetListByDynamicProductListItemDto>().ReverseMap();
         CreateMap<IPaginate<Product>, GetListResponse<GetListByDynamicProductListItemDto>>().ReverseMap();
 
-        CreateMap<Product, CreateProductCommand>().ReverseMap();
+        CreateMap<Product, CreateProductCommand>()
+            .ReverseMap()
+            .ForMember(dest => dest.SalePrice, opt => opt.MapFrom(src => src.PurchasePrice * 2));
         CreateMap<Product, CreatedProductResponse>().ReverseMap();
 
         CreateMap<Product, DeletedProductResponse>().ReverseMap();
@@ -50,6 +53,15 @@ public class MappingProfiles : Profile
         CreateMap<CategoryPartner, GetListByDynamicProductCategoryCategoryPartnerListItemDto>().ReverseMap();
         CreateMap<ICollection<CategoryPartner>, List<GetListByDynamicProductCategoryCategoryPartnerListItemDto>>().ReverseMap();
 
-        CreateMap<Product, UploadedImageResponse>().ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id)).ReverseMap();
+        CreateMap<Product, UploadedImageResponse>().ReverseMap();
+
+        CreateMap<CategoryPartner, UploadedImageResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<UploadedImageResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<Product, UpdateSalePriceCommand>().ReverseMap();
+        CreateMap<Product, UpdatedSalePriceResponse>().ReverseMap();
+
+        CreateMap<CategoryPartner, UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
+        CreateMap<ICollection<CategoryPartner>, List<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
     }
 }

@@ -7,16 +7,16 @@ namespace Application.Features.Products.Commands.UploadImage;
 
 public class UploadImageCommand : IRequest<UploadedImageResponse>, ISecuredRequest
 {
-    public int ProductId { get; set; }
+    public int Id { get; set; }
     public IFormFile Image { get; set; } = null!;
 
     public string[] Roles => new string[] { GeneralOperationClaims.Admin };
 
     public UploadImageCommand() { }
 
-    public UploadImageCommand(int productId, IFormFile image)
+    public UploadImageCommand(int id, IFormFile image)
     {
-        ProductId = productId;
+        Id = id;
         Image = image;
     }
 }

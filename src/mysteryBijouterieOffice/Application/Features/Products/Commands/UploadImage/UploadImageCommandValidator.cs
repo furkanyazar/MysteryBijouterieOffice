@@ -6,7 +6,7 @@ public class UploadImageCommandValidator : AbstractValidator<UploadImageCommand>
 {
     public UploadImageCommandValidator()
     {
-        RuleFor(c => c.ProductId).NotEmpty();
-        RuleFor(c => c.Image).NotEmpty();
+        RuleFor(p => p.Id).NotEmpty();
+        RuleFor(p => p.Image).NotEmpty();
     }
 }

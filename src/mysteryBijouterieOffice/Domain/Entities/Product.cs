@@ -7,7 +7,8 @@ public class Product : Entity<int>
     public int? CategoryId { get; set; }
     public string Name { get; set; }
     public string BarcodeNumber { get; set; }
-    public decimal UnitPrice { get; set; }
+    public decimal PurchasePrice { get; set; }
+    public decimal SalePrice { get; set; }
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
@@ -26,7 +27,8 @@ public class Product : Entity<int>
         int? categoryId,
         string name,
         string barcodeNumber,
-        decimal unitPrice,
+        decimal purchasePrice,
+        decimal salePrice,
         string modelNumber,
         string? imageUrl,
         string? description,
@@ -36,7 +38,8 @@ public class Product : Entity<int>
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
-        UnitPrice = unitPrice;
+        PurchasePrice = purchasePrice;
+        SalePrice = salePrice;
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
@@ -48,7 +51,8 @@ public class Product : Entity<int>
         int? categoryId,
         string name,
         string barcodeNumber,
-        decimal unitPrice,
+        decimal purchasePrice,
+        decimal salePrice,
         string modelNumber,
         string? imageUrl,
         string? description,
@@ -59,7 +63,8 @@ public class Product : Entity<int>
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
-        UnitPrice = unitPrice;
+        PurchasePrice = purchasePrice;
+        SalePrice = salePrice;
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;

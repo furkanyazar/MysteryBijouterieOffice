@@ -29,10 +29,7 @@ public class UploadImageCommandHandler : IRequestHandler<UploadImageCommand, Upl
 
     public async Task<UploadedImageResponse> Handle(UploadImageCommand request, CancellationToken cancellationToken)
     {
-        Product? product = await _productRepository.GetAsync(
-            predicate: p => p.Id == request.ProductId,
-            cancellationToken: cancellationToken
-        );
+        Product? product = await _productRepository.GetAsync(predicate: p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
 

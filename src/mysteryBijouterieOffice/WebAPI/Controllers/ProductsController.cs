@@ -1,6 +1,7 @@
 ﻿using Application.Features.Products.Commands.Create;
 using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
+using Application.Features.Products.Commands.UpdateSalePrice;
 using Application.Features.Products.Commands.UploadImage;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
@@ -60,11 +61,18 @@ public class ProductsController : BaseController
         return Ok(result);
     }
 
-    [HttpPost("[action]/{productId}")]
+    [HttpPut("[action]/{productId}")]
     public async Task<IActionResult> UploadImage([FromRoute] int productId, IFormFile image)
     {
-        UploadImageCommand uploadImageCommand = new() { ProductId = productId, Image = image };
+        UploadImageCommand uploadImageCommand = new() { Id = productId, Image = image };
         UploadedImageResponse result = await Mediator.Send(uploadImageCommand);
+        return Ok(result);
+    }
+
+    [HttpPut("[action]")]
+    public async Task<IActionResult> UpdateSalePrice([FromBody] UpdateSalePriceCommand updateSalePriceCommand)
+    {
+        UpdatedSalePriceResponse result = await Mediator.Send(updateSalePriceCommand);
         return Ok(result);
     }
 }

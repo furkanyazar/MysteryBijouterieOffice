@@ -8,7 +8,8 @@ public class UpdatedProductResponse : IResponse
     public int? CategoryId { get; set; }
     public string Name { get; set; }
     public string BarcodeNumber { get; set; }
-    public decimal UnitPrice { get; set; }
+    public decimal PurchasePrice { get; set; }
+    public decimal SalePrice { get; set; }
     public string? CategoryName { get; set; }
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
@@ -29,7 +30,8 @@ public class UpdatedProductResponse : IResponse
         int? categoryId,
         string name,
         string barcodeNumber,
-        decimal unitPrice,
+        decimal purchasePrice,
+        decimal salePrice,
         string? categoryName,
         string modelNumber,
         string? imageUrl,
@@ -42,7 +44,8 @@ public class UpdatedProductResponse : IResponse
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
-        UnitPrice = unitPrice;
+        PurchasePrice = purchasePrice;
+        SalePrice = salePrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;

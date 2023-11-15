@@ -9,7 +9,7 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
     public int? CategoryId { get; set; }
     public string Name { get; set; }
     public string BarcodeNumber { get; set; }
-    public decimal UnitPrice { get; set; }
+    public decimal PurchasePrice { get; set; }
     public string ModelNumber { get; set; }
     public string? Description { get; set; }
     public bool Status { get; set; }
@@ -27,7 +27,7 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         int? categoryId,
         string name,
         string barcodeNumber,
-        decimal unitPrice,
+        decimal purchasePrice,
         string modelNumber,
         string? description,
         bool status
@@ -36,7 +36,7 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         CategoryId = categoryId;
         Name = name;
         BarcodeNumber = barcodeNumber;
-        UnitPrice = unitPrice;
+        PurchasePrice = purchasePrice;
         ModelNumber = modelNumber;
         Description = description;
         Status = status;

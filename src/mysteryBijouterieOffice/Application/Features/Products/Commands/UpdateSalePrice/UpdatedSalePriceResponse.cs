@@ -1,8 +1,8 @@
 ﻿using Core.Application.Responses;
 
-namespace Application.Features.Products.Commands.Delete;
+namespace Application.Features.Products.Commands.UpdateSalePrice;
 
-public class DeletedProductResponse : IResponse
+public class UpdatedSalePriceResponse : IResponse
 {
     public int Id { get; set; }
     public int? CategoryId { get; set; }
@@ -15,17 +15,17 @@ public class DeletedProductResponse : IResponse
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public bool Status { get; set; }
-    public IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
+    public IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
 
-    public DeletedProductResponse()
+    public UpdatedSalePriceResponse()
     {
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
-        CategoryCategoryPartners = new List<DeletedProductResponseCategoryCategoryPartnerListItemDto>();
+        CategoryCategoryPartners = new List<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>();
     }
 
-    public DeletedProductResponse(
+    public UpdatedSalePriceResponse(
         int id,
         int? categoryId,
         string name,
@@ -34,10 +34,10 @@ public class DeletedProductResponse : IResponse
         decimal salePrice,
         string? categoryName,
         string modelNumber,
-        string? imageUrl,
-        string description,
+        string? ımageUrl,
+        string? description,
         bool status,
-        IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
+        IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
     )
     {
         Id = id;
@@ -48,7 +48,7 @@ public class DeletedProductResponse : IResponse
         SalePrice = salePrice;
         CategoryName = categoryName;
         ModelNumber = modelNumber;
-        ImageUrl = imageUrl;
+        ImageUrl = ımageUrl;
         Description = description;
         Status = status;
         CategoryCategoryPartners = categoryCategoryPartners;
