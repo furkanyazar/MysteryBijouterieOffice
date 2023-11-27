@@ -8,6 +8,6 @@ public class CreatePartnerCommandValidator : AbstractValidator<CreatePartnerComm
     {
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
         RuleFor(p => p.ShippingCost).NotNull();
-        RuleFor(p => p.FreeShippingLowerLimit).NotNull();
+        RuleFor(p => p.ServiceFee).NotNull();
     }
 }
