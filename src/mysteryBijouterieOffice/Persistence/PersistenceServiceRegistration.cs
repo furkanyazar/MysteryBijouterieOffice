@@ -25,6 +25,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IPartnerRepository, PartnerRepository>();
         services.AddScoped<ICategoryPartnerRepository, CategoryPartnerRepository>();
+        services.AddScoped<IMaterialRepository, MaterialRepository>();
+        services.AddScoped<IProductMaterialRepository, ProductMaterialRepository>();
 
         return services;
     }

@@ -15,6 +15,7 @@ public class Product : Entity<int>
     public bool Status { get; set; }
 
     public virtual Category? Category { get; set; }
+    public virtual ICollection<ProductMaterial> ProductMaterials { get; set; } = null!;
 
     public Product()
     {

@@ -29,5 +29,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
 
         builder.HasOne(p => p.Category);
+        builder.HasMany(p => p.ProductMaterials);
     }
 }

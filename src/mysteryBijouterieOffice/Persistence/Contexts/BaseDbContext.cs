@@ -22,6 +22,8 @@ public class BaseDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Partner> Partners { get; set; }
     public DbSet<CategoryPartner> CategoryPartners { get; set; }
+    public DbSet<Material> Materials { get; set; }
+    public DbSet<ProductMaterial> ProductMaterials { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
