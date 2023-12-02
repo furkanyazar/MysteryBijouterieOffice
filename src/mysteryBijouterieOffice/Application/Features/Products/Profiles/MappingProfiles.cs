@@ -63,5 +63,29 @@ public class MappingProfiles : Profile
 
         CreateMap<CategoryPartner, UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>().ReverseMap();
         CreateMap<ICollection<CategoryPartner>, List<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, CreatedProductResponseProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<CreatedProductResponseProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, DeletedProductResponseProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<DeletedProductResponseProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, UpdatedProductResponseProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<UpdatedProductResponseProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, GetByIdProductResponseProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<GetByIdProductResponseProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, GetListProductProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<GetListProductProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, GetListByDynamicProductProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<GetListByDynamicProductProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, CreateProductCommandProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<CreateProductCommandProductMaterialListItemDto>>().ReverseMap();
+
+        CreateMap<ProductMaterial, UpdateProductCommandProductMaterialListItemDto>().ReverseMap();
+        CreateMap<ICollection<ProductMaterial>, List<UpdateProductCommandProductMaterialListItemDto>>().ReverseMap();
     }
 }

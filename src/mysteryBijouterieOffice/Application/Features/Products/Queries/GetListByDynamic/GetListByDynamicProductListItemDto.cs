@@ -16,6 +16,7 @@ public class GetListByDynamicProductListItemDto : IDto
     public string? Description { get; set; }
     public bool Status { get; set; }
     public IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
+    public IList<GetListByDynamicProductProductMaterialListItemDto> ProductMaterials { get; set; }
 
     public GetListByDynamicProductListItemDto()
     {
@@ -23,6 +24,7 @@ public class GetListByDynamicProductListItemDto : IDto
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<GetListByDynamicProductCategoryCategoryPartnerListItemDto>();
+        ProductMaterials = new List<GetListByDynamicProductProductMaterialListItemDto>();
     }
 
     public GetListByDynamicProductListItemDto(
@@ -37,7 +39,8 @@ public class GetListByDynamicProductListItemDto : IDto
         string? imageUrl,
         string? description,
         bool status,
-        IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> categoryPartners
+        IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
+        IList<GetListByDynamicProductProductMaterialListItemDto> productMaterials
     )
     {
         Id = id;
@@ -51,6 +54,7 @@ public class GetListByDynamicProductListItemDto : IDto
         ImageUrl = imageUrl;
         Description = description;
         Status = status;
-        CategoryCategoryPartners = categoryPartners;
+        CategoryCategoryPartners = categoryCategoryPartners;
+        ProductMaterials = productMaterials;
     }
 }

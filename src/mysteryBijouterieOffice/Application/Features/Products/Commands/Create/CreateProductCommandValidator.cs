@@ -11,6 +11,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
         RuleFor(p => p.BarcodeNumber).NotEmpty().Length(13).Must(StartsWith).Must(Number);
         RuleFor(p => p.PurchasePrice).NotNull();
         RuleFor(p => p.ModelNumber).NotEmpty().Length(8).Must(StartsWith).Must(Number);
+        RuleForEach(p => p.ProductMaterials).SetValidator(new CreateProductCommandProductMaterialListItemDtoValidator());
     }
 
     private bool StartsWith(string barcodeNumber) => barcodeNumber.StartsWith("MB-");

@@ -13,6 +13,7 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
     public string ModelNumber { get; set; }
     public string? Description { get; set; }
     public bool Status { get; set; }
+    public IList<CreateProductCommandProductMaterialListItemDto> ProductMaterials { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
 
@@ -21,6 +22,7 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
+        ProductMaterials = new List<CreateProductCommandProductMaterialListItemDto>();
     }
 
     public CreateProductCommand(
@@ -30,7 +32,8 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         decimal purchasePrice,
         string modelNumber,
         string? description,
-        bool status
+        bool status,
+        IList<CreateProductCommandProductMaterialListItemDto> productMaterials
     )
     {
         CategoryId = categoryId;
@@ -40,5 +43,6 @@ public class CreateProductCommand : IRequest<CreatedProductResponse>, ISecuredRe
         ModelNumber = modelNumber;
         Description = description;
         Status = status;
+        ProductMaterials = productMaterials;
     }
 }

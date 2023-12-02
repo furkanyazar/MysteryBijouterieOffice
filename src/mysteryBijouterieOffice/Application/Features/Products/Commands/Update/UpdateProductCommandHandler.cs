@@ -1,4 +1,5 @@
 ﻿using Application.Features.Products.Rules;
+using Application.Services.ProductMaterialsService;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -11,12 +12,19 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
     private readonly ProductBusinessRules _productBusinessRules;
+    private readonly IProductMaterialService _productMaterialService;
 
-    public UpdateProductCommandHandler(IProductRepository productRepository, IMapper mapper, ProductBusinessRules productBusinessRules)
+    public UpdateProductCommandHandler(
+        IProductRepository productRepository,
+        IMapper mapper,
+        ProductBusinessRules productBusinessRules,
+        IProductMaterialService productMaterialService
+    )
     {
         _productRepository = productRepository;
         _mapper = mapper;
         _productBusinessRules = productBusinessRules;
+        _productMaterialService = productMaterialService;
     }
 
     public async Task<UpdatedProductResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
@@ -27,6 +35,8 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         await _productBusinessRules.ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(request.Id, request.BarcodeNumber);
 
         _mapper.Map(request, product);
+
+        await _productMaterialService.DeleteAllByProductId(request.Id, cancellationToken);
 
         Product updatedProduct = await _productRepository.UpdateAsync(product!);
         UpdatedProductResponse response = _mapper.Map<UpdatedProductResponse>(updatedProduct);

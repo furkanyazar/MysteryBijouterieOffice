@@ -16,6 +16,7 @@ public class UpdatedSalePriceResponse : IResponse
     public string? Description { get; set; }
     public bool Status { get; set; }
     public IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
+    public IList<UpdatedSalePriceResponseProductMaterialListItemDto> ProductMaterials { get; set; }
 
     public UpdatedSalePriceResponse()
     {
@@ -23,6 +24,7 @@ public class UpdatedSalePriceResponse : IResponse
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>();
+        ProductMaterials = new List<UpdatedSalePriceResponseProductMaterialListItemDto>();
     }
 
     public UpdatedSalePriceResponse(
@@ -37,7 +39,8 @@ public class UpdatedSalePriceResponse : IResponse
         string? ımageUrl,
         string? description,
         bool status,
-        IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
+        IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
+        IList<UpdatedSalePriceResponseProductMaterialListItemDto> productMaterials
     )
     {
         Id = id;
@@ -52,5 +55,6 @@ public class UpdatedSalePriceResponse : IResponse
         Description = description;
         Status = status;
         CategoryCategoryPartners = categoryCategoryPartners;
+        ProductMaterials = productMaterials;
     }
 }

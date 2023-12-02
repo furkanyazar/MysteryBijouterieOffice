@@ -16,6 +16,7 @@ public class CreatedProductResponse : IResponse
     public string? Description { get; set; }
     public bool Status { get; set; }
     public IList<CreatedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
+    public IList<CreatedProductResponseProductMaterialListItemDto> ProductMaterials { get; set; }
 
     public CreatedProductResponse()
     {
@@ -23,6 +24,7 @@ public class CreatedProductResponse : IResponse
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<CreatedProductResponseCategoryCategoryPartnerListItemDto>();
+        ProductMaterials = new List<CreatedProductResponseProductMaterialListItemDto>();
     }
 
     public CreatedProductResponse(
@@ -37,7 +39,8 @@ public class CreatedProductResponse : IResponse
         string? imageUrl,
         string? description,
         bool status,
-        IList<CreatedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners
+        IList<CreatedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
+        IList<CreatedProductResponseProductMaterialListItemDto> productMaterials
     )
     {
         Id = id;
@@ -52,5 +55,6 @@ public class CreatedProductResponse : IResponse
         Description = description;
         Status = status;
         CategoryCategoryPartners = categoryCategoryPartners;
+        ProductMaterials = productMaterials;
     }
 }

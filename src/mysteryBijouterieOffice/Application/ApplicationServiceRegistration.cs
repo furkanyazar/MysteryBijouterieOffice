@@ -1,4 +1,5 @@
 ﻿using Application.Services.AuthService;
+using Application.Services.ProductMaterialsService;
 using Application.Services.UsersService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
@@ -45,6 +46,7 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IUserService, UserManager>();
+        services.AddScoped<IProductMaterialService, ProductMaterialManager>();
 
         return services;
     }
