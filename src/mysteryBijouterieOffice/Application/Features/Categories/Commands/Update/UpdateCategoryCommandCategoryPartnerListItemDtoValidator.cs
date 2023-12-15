@@ -6,7 +6,7 @@ public class UpdateCategoryCommandCategoryPartnerListItemDtoValidator : Abstract
 {
     public UpdateCategoryCommandCategoryPartnerListItemDtoValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Id).NotNull();
         RuleFor(c => c.PartnerId).NotEmpty();
         RuleFor(c => c.CommissionRate).NotNull();
     }
