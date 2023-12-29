@@ -10,5 +10,6 @@ public class UpdatePartnerCommandValidator : AbstractValidator<UpdatePartnerComm
         RuleFor(p => p.Name).NotEmpty().MinimumLength(2);
         RuleFor(p => p.ShippingCost).NotNull();
         RuleFor(p => p.ServiceFee).NotNull();
+        RuleFor(p => p.TransactionFee).NotNull();
     }
 }

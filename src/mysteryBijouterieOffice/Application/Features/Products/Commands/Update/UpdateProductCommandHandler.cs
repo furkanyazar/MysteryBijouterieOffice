@@ -33,6 +33,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
 
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
         await _productBusinessRules.ProductBarcodeNumberCanNotBeDuplicatedWhenUpdated(request.Id, request.BarcodeNumber);
+        await _productBusinessRules.ProductStockCodeNotBeDuplicatedWhenUpdated(request.Id, request.StockCode);
 
         _mapper.Map(request, product);
 

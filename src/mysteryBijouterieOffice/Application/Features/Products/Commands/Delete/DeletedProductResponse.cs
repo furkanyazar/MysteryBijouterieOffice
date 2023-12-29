@@ -15,7 +15,7 @@ public class DeletedProductResponse : IResponse
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int UnitsInStock { get; set; }
-    public string StockCode { get; set; }
+    public string? StockCode { get; set; }
     public IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
     public IList<DeletedProductResponseProductMaterialListItemDto> ProductMaterials { get; set; }
 
@@ -26,7 +26,6 @@ public class DeletedProductResponse : IResponse
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<DeletedProductResponseCategoryCategoryPartnerListItemDto>();
         ProductMaterials = new List<DeletedProductResponseProductMaterialListItemDto>();
-        StockCode = string.Empty;
     }
 
     public DeletedProductResponse(
@@ -43,7 +42,7 @@ public class DeletedProductResponse : IResponse
         int unitsInStock,
         IList<DeletedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
         IList<DeletedProductResponseProductMaterialListItemDto> productMaterials,
-        string stockCode
+        string? stockCode
     )
     {
         Id = id;

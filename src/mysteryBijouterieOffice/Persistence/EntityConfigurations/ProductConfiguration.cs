@@ -20,7 +20,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.ImageUrl).HasColumnName("ImageUrl").IsRequired(false);
         builder.Property(p => p.Description).HasColumnName("Description").IsRequired(false);
         builder.Property(p => p.UnitsInStock).HasColumnName("UnitsInStock").IsRequired();
-        builder.Property(p => p.StockCode).HasColumnName("StockCode").IsRequired();
+        builder.Property(p => p.StockCode).HasColumnName("StockCode").IsRequired(false);
         builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate").IsRequired(false);
         builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate").IsRequired(false);

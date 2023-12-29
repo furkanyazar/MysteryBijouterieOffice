@@ -15,7 +15,7 @@ public class UpdatedSalePriceResponse : IResponse
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int UnitsInStock { get; set; }
-    public string StockCode { get; set; }
+    public string? StockCode { get; set; }
     public IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
     public IList<UpdatedSalePriceResponseProductMaterialListItemDto> ProductMaterials { get; set; }
 
@@ -26,7 +26,6 @@ public class UpdatedSalePriceResponse : IResponse
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto>();
         ProductMaterials = new List<UpdatedSalePriceResponseProductMaterialListItemDto>();
-        StockCode = string.Empty;
     }
 
     public UpdatedSalePriceResponse(
@@ -43,7 +42,7 @@ public class UpdatedSalePriceResponse : IResponse
         int unitsInStock,
         IList<UpdatedSalePriceResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
         IList<UpdatedSalePriceResponseProductMaterialListItemDto> productMaterials,
-        string stockCode
+        string? stockCode
     )
     {
         Id = id;

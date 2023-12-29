@@ -15,7 +15,7 @@ public class CreatedProductResponse : IResponse
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int UnitsInStock { get; set; }
-    public string StockCode { get; set; }
+    public string? StockCode { get; set; }
     public IList<CreatedProductResponseCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
     public IList<CreatedProductResponseProductMaterialListItemDto> ProductMaterials { get; set; }
 
@@ -26,7 +26,6 @@ public class CreatedProductResponse : IResponse
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<CreatedProductResponseCategoryCategoryPartnerListItemDto>();
         ProductMaterials = new List<CreatedProductResponseProductMaterialListItemDto>();
-        StockCode = string.Empty;
     }
 
     public CreatedProductResponse(
@@ -43,7 +42,7 @@ public class CreatedProductResponse : IResponse
         int unitsInStock,
         IList<CreatedProductResponseCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
         IList<CreatedProductResponseProductMaterialListItemDto> productMaterials,
-        string stockCode
+        string? stockCode
     )
     {
         Id = id;

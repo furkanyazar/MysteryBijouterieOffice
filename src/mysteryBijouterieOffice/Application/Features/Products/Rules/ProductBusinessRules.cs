@@ -43,4 +43,32 @@ public class ProductBusinessRules : BaseBusinessRules
         if (doesExists)
             throw new BusinessException(ProductsMessages.ProductBarcodeNumberAlreadyExists);
     }
+
+    public async Task ProductStockCodeNotBeDuplicatedWhenInserted(string? stockCode)
+    {
+        if (string.IsNullOrEmpty(stockCode))
+            return;
+
+        bool doesExists = await _productRepository.AnyAsync(
+            predicate: p => p.StockCode == stockCode,
+            withDeleted: true,
+            enableTracking: false
+        );
+        if (doesExists)
+            throw new BusinessException(ProductsMessages.ProductStockCodeAlreadyExists);
+    }
+
+    public async Task ProductStockCodeNotBeDuplicatedWhenUpdated(int id, string? stockCode)
+    {
+        if (string.IsNullOrEmpty(stockCode))
+            return;
+
+        bool doesExists = await _productRepository.AnyAsync(
+            predicate: p => p.Id != id && p.StockCode == stockCode,
+            withDeleted: true,
+            enableTracking: false
+        );
+        if (doesExists)
+            throw new BusinessException(ProductsMessages.ProductStockCodeAlreadyExists);
+    }
 }

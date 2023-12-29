@@ -22,6 +22,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     public async Task<CreatedProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         await _productBusinessRules.ProductBarcodeNumberCanNotBeDuplicatedWhenInserted(request.BarcodeNumber);
+        await _productBusinessRules.ProductStockCodeNotBeDuplicatedWhenInserted(request.StockCode);
 
         Product mappedProduct = _mapper.Map<Product>(request);
         Product createdProduct = await _productRepository.AddAsync(mappedProduct);

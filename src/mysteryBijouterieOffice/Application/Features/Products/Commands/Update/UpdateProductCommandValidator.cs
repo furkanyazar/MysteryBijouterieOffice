@@ -13,6 +13,7 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
         RuleFor(p => p.PurchasePrice).NotNull();
         RuleFor(p => p.ModelNumber).NotEmpty().Length(8).Must(StartsWith).Must(Number);
         RuleForEach(p => p.ProductMaterials).SetValidator(new UpdateProductCommandProductMaterialListItemDtoValidator());
+        RuleFor(p => p.UnitsInStock).NotNull();
     }
 
     private bool StartsWith(string barcodeNumber) => barcodeNumber.StartsWith("MB-");

@@ -15,7 +15,7 @@ public class GetListByDynamicProductListItemDto : IDto
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int UnitsInStock { get; set; }
-    public string StockCode { get; set; }
+    public string? StockCode { get; set; }
     public IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
     public IList<GetListByDynamicProductProductMaterialListItemDto> ProductMaterials { get; set; }
 
@@ -26,7 +26,6 @@ public class GetListByDynamicProductListItemDto : IDto
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<GetListByDynamicProductCategoryCategoryPartnerListItemDto>();
         ProductMaterials = new List<GetListByDynamicProductProductMaterialListItemDto>();
-        StockCode = string.Empty;
     }
 
     public GetListByDynamicProductListItemDto(
@@ -43,7 +42,7 @@ public class GetListByDynamicProductListItemDto : IDto
         int unitsInStock,
         IList<GetListByDynamicProductCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
         IList<GetListByDynamicProductProductMaterialListItemDto> productMaterials,
-        string stockCode
+        string? stockCode
     )
     {
         Id = id;

@@ -13,7 +13,7 @@ public class Product : Entity<int>
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int UnitsInStock { get; set; }
-    public string StockCode { get; set; }
+    public string? StockCode { get; set; }
 
     public virtual Category? Category { get; set; }
     public virtual ICollection<ProductMaterial> ProductMaterials { get; set; } = null!;
@@ -23,7 +23,6 @@ public class Product : Entity<int>
         Name = string.Empty;
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
-        StockCode = string.Empty;
     }
 
     public Product(
@@ -36,7 +35,7 @@ public class Product : Entity<int>
         string? imageUrl,
         string? description,
         int unitsInStock,
-        string stockCode
+        string? stockCode
     )
     {
         CategoryId = categoryId;
@@ -62,7 +61,7 @@ public class Product : Entity<int>
         string? imageUrl,
         string? description,
         int unitsInStock,
-        string stockCode
+        string? stockCode
     )
         : base(id)
     {
