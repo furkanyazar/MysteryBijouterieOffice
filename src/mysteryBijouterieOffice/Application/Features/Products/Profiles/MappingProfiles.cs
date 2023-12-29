@@ -27,7 +27,7 @@ public class MappingProfiles : Profile
 
         CreateMap<Product, CreateProductCommand>()
             .ReverseMap()
-            .ForMember(dest => dest.SalePrice, opt => opt.MapFrom(src => src.PurchasePrice * 3));
+            .ForMember(dest => dest.SalePrice, opt => opt.MapFrom(src => src.PurchasePrice * 4));
         CreateMap<Product, CreatedProductResponse>().ReverseMap();
 
         CreateMap<Product, DeletedProductResponse>().ReverseMap();

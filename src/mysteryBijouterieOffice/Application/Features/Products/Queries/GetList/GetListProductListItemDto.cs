@@ -14,7 +14,8 @@ public class GetListProductListItemDto : IDto
     public string ModelNumber { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
-    public bool Status { get; set; }
+    public int UnitsInStock { get; set; }
+    public string StockCode { get; set; }
     public IList<GetListProductCategoryCategoryPartnerListItemDto> CategoryCategoryPartners { get; set; }
     public IList<GetListProductProductMaterialListItemDto> ProductMaterials { get; set; }
 
@@ -25,6 +26,7 @@ public class GetListProductListItemDto : IDto
         ModelNumber = string.Empty;
         CategoryCategoryPartners = new List<GetListProductCategoryCategoryPartnerListItemDto>();
         ProductMaterials = new List<GetListProductProductMaterialListItemDto>();
+        StockCode = string.Empty;
     }
 
     public GetListProductListItemDto(
@@ -38,9 +40,10 @@ public class GetListProductListItemDto : IDto
         string modelNumber,
         string? imageUrl,
         string? description,
-        bool status,
+        int unitsInStock,
         IList<GetListProductCategoryCategoryPartnerListItemDto> categoryCategoryPartners,
-        IList<GetListProductProductMaterialListItemDto> productMaterials
+        IList<GetListProductProductMaterialListItemDto> productMaterials,
+        string stockCode
     )
     {
         Id = id;
@@ -53,8 +56,9 @@ public class GetListProductListItemDto : IDto
         ModelNumber = modelNumber;
         ImageUrl = imageUrl;
         Description = description;
-        Status = status;
+        UnitsInStock = unitsInStock;
         CategoryCategoryPartners = categoryCategoryPartners;
         ProductMaterials = productMaterials;
+        StockCode = stockCode;
     }
 }

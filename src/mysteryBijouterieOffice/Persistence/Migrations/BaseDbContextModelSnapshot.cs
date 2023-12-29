@@ -303,8 +303,8 @@ namespace Persistence.Migrations
                             Email = "test@mail.com",
                             FirstName = "Test",
                             LastName = "Mail",
-                            PasswordHash = new byte[] { 150, 107, 2, 237, 165, 9, 131, 218, 101, 210, 107, 67, 59, 179, 106, 159, 39, 225, 40, 69, 63, 73, 232, 55, 141, 5, 37, 99, 215, 85, 20, 23, 8, 214, 209, 13, 84, 107, 38, 242, 177, 197, 157, 108, 196, 142, 87, 75, 20, 18, 191, 21, 187, 134, 204, 191, 83, 143, 232, 101, 56, 228, 182, 59 },
-                            PasswordSalt = new byte[] { 138, 53, 58, 240, 111, 90, 53, 32, 107, 189, 249, 247, 108, 246, 171, 99, 122, 10, 91, 163, 232, 208, 117, 172, 18, 2, 77, 54, 186, 162, 249, 138, 177, 189, 36, 152, 23, 127, 252, 137, 62, 72, 156, 136, 88, 14, 138, 175, 248, 158, 211, 133, 218, 244, 220, 112, 180, 68, 194, 108, 48, 241, 12, 68, 188, 60, 40, 226, 176, 242, 245, 206, 228, 104, 199, 127, 34, 201, 236, 248, 79, 6, 94, 49, 17, 94, 111, 130, 205, 49, 109, 240, 112, 210, 209, 99, 240, 75, 208, 214, 217, 175, 29, 151, 114, 116, 226, 127, 203, 138, 142, 212, 138, 92, 180, 107, 55, 172, 100, 29, 248, 170, 24, 69, 123, 234, 43, 112 },
+                            PasswordHash = new byte[] { 90, 247, 255, 204, 227, 120, 177, 126, 206, 29, 226, 201, 67, 3, 55, 248, 90, 54, 117, 192, 11, 197, 66, 91, 240, 203, 24, 66, 199, 251, 212, 235, 88, 59, 68, 193, 52, 20, 95, 38, 16, 56, 70, 169, 98, 35, 114, 64, 134, 170, 182, 84, 129, 65, 209, 99, 78, 64, 52, 57, 45, 120, 153, 128 },
+                            PasswordSalt = new byte[] { 174, 12, 184, 188, 96, 240, 115, 206, 22, 171, 6, 254, 3, 168, 33, 4, 157, 49, 48, 227, 105, 225, 193, 55, 42, 35, 152, 24, 83, 186, 84, 51, 235, 44, 69, 58, 129, 229, 201, 141, 208, 195, 42, 176, 71, 162, 36, 144, 85, 254, 178, 7, 224, 243, 162, 109, 166, 84, 106, 199, 174, 40, 62, 27, 95, 92, 159, 155, 15, 9, 6, 148, 144, 224, 116, 55, 32, 141, 217, 97, 171, 234, 251, 37, 223, 23, 194, 25, 112, 114, 3, 163, 76, 101, 74, 99, 46, 171, 167, 152, 111, 31, 61, 227, 147, 203, 207, 85, 99, 119, 130, 141, 198, 51, 214, 218, 132, 5, 224, 12, 232, 192, 101, 194, 226, 237, 235, 34 },
                             Status = true,
                             UserGroupId = 1
                         });
@@ -548,13 +548,27 @@ namespace Persistence.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("FirstScaleUpperLimit");
 
-                    b.Property<bool>("HasFirstScale")
+                    b.Property<bool>("HasShippingScale")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("HasFirstScale");
+                        .HasDefaultValue(false)
+                        .HasColumnName("HasShippingScale");
 
-                    b.Property<bool>("HasSecondScale")
+                    b.Property<bool>("HasTaxCommissions")
                         .HasColumnType("bit")
-                        .HasColumnName("HasSecondScale");
+                        .HasColumnName("HasTaxCommissions");
+
+                    b.Property<bool>("HasTaxServiceFee")
+                        .HasColumnType("bit")
+                        .HasColumnName("HasTaxServiceFee");
+
+                    b.Property<bool>("HasTaxShippingCost")
+                        .HasColumnType("bit")
+                        .HasColumnName("HasTaxShippingCost");
+
+                    b.Property<bool>("HasTaxTransactionFee")
+                        .HasColumnType("bit")
+                        .HasColumnName("HasTaxTransactionFee");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -580,6 +594,10 @@ namespace Persistence.Migrations
                     b.Property<decimal>("ShippingCost")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("ShippingCost");
+
+                    b.Property<decimal>("TransactionFee")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("TransactionFee");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -645,11 +663,14 @@ namespace Persistence.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("SalePrice");
 
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true)
-                        .HasColumnName("Status");
+                    b.Property<string>("StockCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("StockCode");
+
+                    b.Property<int>("UnitsInStock")
+                        .HasColumnType("int")
+                        .HasColumnName("UnitsInStock");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")

@@ -13,7 +13,8 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
     public decimal PurchasePrice { get; set; }
     public string ModelNumber { get; set; }
     public string? Description { get; set; }
-    public bool Status { get; set; }
+    public int UnitsInStock { get; set; }
+    public string StockCode { get; set; }
     public IList<UpdateProductCommandProductMaterialListItemDto> ProductMaterials { get; set; }
 
     public string[] Roles => new[] { GeneralOperationClaims.Admin };
@@ -24,6 +25,7 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         BarcodeNumber = string.Empty;
         ModelNumber = string.Empty;
         ProductMaterials = new List<UpdateProductCommandProductMaterialListItemDto>();
+        StockCode = string.Empty;
     }
 
     public UpdateProductCommand(
@@ -34,8 +36,9 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         decimal purchasePrice,
         string modelNumber,
         string? description,
-        bool status,
-        IList<UpdateProductCommandProductMaterialListItemDto> productMaterials
+        int unitsInStock,
+        IList<UpdateProductCommandProductMaterialListItemDto> productMaterials,
+        string stockCode
     )
     {
         Id = id;
@@ -45,7 +48,8 @@ public class UpdateProductCommand : IRequest<UpdatedProductResponse>, ISecuredRe
         PurchasePrice = purchasePrice;
         ModelNumber = modelNumber;
         Description = description;
-        Status = status;
+        UnitsInStock = unitsInStock;
         ProductMaterials = productMaterials;
+        StockCode = stockCode;
     }
 }
