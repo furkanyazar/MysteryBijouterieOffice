@@ -21,6 +21,7 @@ public class Partner : Entity<int>
     public bool HasTaxCommissions { get; set; }
 
     public virtual ICollection<CategoryPartner> CategoryPartners { get; set; } = null!;
+    public virtual ICollection<Discount> Discounts { get; set; } = null!;
 
     public Partner()
     {

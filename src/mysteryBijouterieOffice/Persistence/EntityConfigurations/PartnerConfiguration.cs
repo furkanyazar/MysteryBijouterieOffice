@@ -35,5 +35,6 @@ public class PartnerConfiguration : IEntityTypeConfiguration<Partner>
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
 
         builder.HasMany(p => p.CategoryPartners);
+        builder.HasMany(p => p.Discounts);
     }
 }
