@@ -15,6 +15,8 @@ public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
         builder.Property(d => d.Name).HasColumnName("Name").IsRequired();
         builder.Property(d => d.DiscountType).HasColumnName("DiscountType").IsRequired();
         builder.Property(d => d.DiscountAmount).HasColumnName("DiscountAmount").IsRequired();
+        builder.Property(d => d.DiscountLowerLimit).HasColumnName("DiscountLowerLimit").IsRequired();
+        builder.Property(d => d.Priority).HasColumnName("Priority").IsRequired();
         builder.Property(d => d.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(d => d.UpdatedDate).HasColumnName("UpdatedDate").IsRequired(false);
         builder.Property(d => d.DeletedDate).HasColumnName("DeletedDate").IsRequired(false);

@@ -11,6 +11,8 @@ public class UpdateDiscountCommand : IRequest<UpdatedDiscountResponse>, ISecured
     public string Name { get; set; }
     public int DiscountType { get; set; }
     public decimal DiscountAmount { get; set; }
+    public decimal DiscountLowerLimit { get; set; }
+    public int Priority { get; set; }
 
     public string[] Roles => new string[] { GeneralOperationClaims.Admin };
 
@@ -19,12 +21,22 @@ public class UpdateDiscountCommand : IRequest<UpdatedDiscountResponse>, ISecured
         Name = string.Empty;
     }
 
-    public UpdateDiscountCommand(int id, int partnerId, string name, int discountType, decimal discountAmount)
+    public UpdateDiscountCommand(
+        int id,
+        int partnerId,
+        string name,
+        int discountType,
+        decimal discountAmount,
+        decimal discountLowerLimit,
+        int priority
+    )
     {
         Id = id;
         PartnerId = partnerId;
         Name = name;
         DiscountType = discountType;
         DiscountAmount = discountAmount;
+        DiscountLowerLimit = discountLowerLimit;
+        Priority = priority;
     }
 }

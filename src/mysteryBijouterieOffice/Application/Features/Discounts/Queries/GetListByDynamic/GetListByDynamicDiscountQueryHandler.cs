@@ -4,6 +4,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Discounts.Queries.GetListByDynamic;
 
@@ -26,6 +27,7 @@ public class GetListByDynamicDiscountQueryHandler
     {
         IPaginate<Discount> discounts = await _discountRepository.GetListByDynamicAsync(
             dynamic: request.DynamicQuery,
+            include: d => d.Include(d => d.Partner),
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
             cancellationToken: cancellationToken

@@ -10,6 +10,8 @@ public class CreateDiscountCommand : IRequest<CreatedDiscountResponse>, ISecured
     public string Name { get; set; }
     public int DiscountType { get; set; }
     public decimal DiscountAmount { get; set; }
+    public decimal DiscountLowerLimit { get; set; }
+    public int Priority { get; set; }
 
     public string[] Roles => new string[] { GeneralOperationClaims.Admin };
 
@@ -18,11 +20,20 @@ public class CreateDiscountCommand : IRequest<CreatedDiscountResponse>, ISecured
         Name = string.Empty;
     }
 
-    public CreateDiscountCommand(int partnerId, string name, int discountType, decimal discountAmount)
+    public CreateDiscountCommand(
+        int partnerId,
+        string name,
+        int discountType,
+        decimal discountAmount,
+        decimal discountLowerLimit,
+        int priority
+    )
     {
         PartnerId = partnerId;
         Name = name;
         DiscountType = discountType;
         DiscountAmount = discountAmount;
+        DiscountLowerLimit = discountLowerLimit;
+        Priority = priority;
     }
 }

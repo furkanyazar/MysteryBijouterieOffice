@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Discounts.Queries.GetById;
 
@@ -21,7 +22,11 @@ public class GetByIdDiscountQueryHandler : IRequestHandler<GetByIdDiscountQuery,
 
     public async Task<GetByIdDiscountResponse> Handle(GetByIdDiscountQuery request, CancellationToken cancellationToken)
     {
-        Discount? discount = await _discountRepository.GetAsync(predicate: d => d.Id == request.Id, cancellationToken: cancellationToken);
+        Discount? discount = await _discountRepository.GetAsync(
+            predicate: d => d.Id == request.Id,
+            include: d => d.Include(d => d.Partner),
+            cancellationToken: cancellationToken
+        );
 
         await _discountBusinessRules.DiscountShouldExistWhenSelected(discount);
 

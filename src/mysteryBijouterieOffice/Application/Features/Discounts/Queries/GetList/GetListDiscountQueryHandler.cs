@@ -4,6 +4,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Discounts.Queries.GetList;
 
@@ -21,6 +22,7 @@ public class GetListDiscountQueryHandler : IRequestHandler<GetListDiscountQuery,
     public async Task<GetListResponse<GetListDiscountListItemDto>> Handle(GetListDiscountQuery request, CancellationToken cancellationToken)
     {
         IPaginate<Discount> discounts = await _discountRepository.GetListAsync(
+            include: d => d.Include(d => d.Partner),
             index: request.PageRequest.PageIndex,
             size: request.PageRequest.PageSize,
             cancellationToken: cancellationToken

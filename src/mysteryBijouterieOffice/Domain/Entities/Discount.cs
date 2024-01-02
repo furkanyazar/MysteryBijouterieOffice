@@ -9,6 +9,8 @@ public class Discount : Entity<int>
     public string Name { get; set; }
     public DiscountType DiscountType { get; set; }
     public decimal DiscountAmount { get; set; }
+    public decimal DiscountLowerLimit { get; set; }
+    public int Priority { get; set; }
 
     public virtual Partner Partner { get; set; } = null!;
 
@@ -17,20 +19,32 @@ public class Discount : Entity<int>
         Name = string.Empty;
     }
 
-    public Discount(int partnerId, string name, DiscountType discountType, decimal discountAmount)
+    public Discount(int partnerId, string name, DiscountType discountType, decimal discountAmount, decimal discountLowerLimit, int priority)
     {
         Name = name;
         PartnerId = partnerId;
         DiscountType = discountType;
         DiscountAmount = discountAmount;
+        DiscountLowerLimit = discountLowerLimit;
+        Priority = priority;
     }
 
-    public Discount(int id, int partnerId, string name, DiscountType discountType, decimal discountAmount)
+    public Discount(
+        int id,
+        int partnerId,
+        string name,
+        DiscountType discountType,
+        decimal discountAmount,
+        decimal discountLowerLimit,
+        int priority
+    )
         : base(id)
     {
         Name = name;
         PartnerId = partnerId;
         DiscountType = discountType;
         DiscountAmount = discountAmount;
+        DiscountLowerLimit = discountLowerLimit;
+        Priority = priority;
     }
 }
