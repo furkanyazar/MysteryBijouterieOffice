@@ -1,7 +1,7 @@
-﻿using Application.Services.Repositories;
+﻿using System.Linq.Expressions;
+using Application.Services.Repositories;
 using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
 
 namespace Application.Services.UsersService;
 

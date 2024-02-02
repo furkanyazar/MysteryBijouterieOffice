@@ -1,6 +1,6 @@
-﻿using Core.Security.Entities;
+﻿using System.Linq.Expressions;
+using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
 
 namespace Application.Services.UsersService;
 
