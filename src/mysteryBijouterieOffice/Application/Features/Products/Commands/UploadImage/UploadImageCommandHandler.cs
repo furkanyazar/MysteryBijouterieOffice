@@ -34,7 +34,7 @@ public class UploadImageCommandHandler : IRequestHandler<UploadImageCommand, Upl
         await _productBusinessRules.ProductShouldExistWhenSelected(product);
 
         string imageUrl = await _imageService.UploadAsync(request.Image);
-        product!.ImageUrl = imageUrl.Replace("http", "https");
+        product!.ImageUrl = imageUrl.Replace("http://", "https://");
 
         Product updatedProduct = await _productRepository.UpdateAsync(product);
         UploadedImageResponse response = _mapper.Map<UploadedImageResponse>(updatedProduct);
