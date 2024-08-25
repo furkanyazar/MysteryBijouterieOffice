@@ -21,6 +21,12 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
 builder.Services.AddHttpContextAccessor();
 
+builder
+    .Configuration
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json")
+    .AddEnvironmentVariables();
+
 const string tokenOptionsSection = "TokenOptions";
 TokenOptions tokenOptions =
     builder.Configuration.GetSection(tokenOptionsSection).Get<TokenOptions>()
@@ -72,12 +78,6 @@ builder
         );
         opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
     });
-
-builder
-    .Configuration
-    .AddJsonFile("appsettings.json")
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json")
-    .AddEnvironmentVariables();
 
 WebApplication app = builder.Build();
 
